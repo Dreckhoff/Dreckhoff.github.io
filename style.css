@@ -1,14 +1,72 @@
-:root{--bg:#f8fafc;--accent:#0b84ff;--muted:#555}
-*{box-sizing:border-box}body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;line-height:1.4;margin:0;background:var(--bg);color:#111}
-.container{max-width:900px;margin:0 auto;padding:24px}
-.site-header{background:#fff;box-shadow:0 1px 4px rgba(0,0,0,.05)}
-.site-header .container{display:flex;align-items:center;justify-content:space-between}
-nav a{margin-left:12px;text-decoration:none;color:var(--muted)}
-.hero{padding:48px 0;text-align:center}
-.hero h2{font-size:clamp(1.6rem,3vw,2.4rem);margin:0 0 8px}
-.btn{display:inline-block;margin-top:12px;padding:10px 16px;background:var(--accent);color:#fff;border-radius:8px;text-decoration:none}
-.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:12px}
-.card{background:#fff;padding:12px;border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,.04)}
-form input, form textarea{width:100%;padding:8px;margin:6px 0;border-radius:6px;border:1px solid #ddd}
-button{padding:10px 14px;border:none;border-radius:6px;background:var(--accent);color:#fff}
-.site-footer{padding:18px 0;text-align:center;color:var(--muted);font-size:.9rem;margin-top:24px}
+body {
+  font-family: Arial, sans-serif;
+  max-width: 700px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+  line-height: 1.6;
+  color: #333;
+  background: #f9f9f9;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+header h1 {
+  margin-bottom: 0.2rem;
+}
+
+nav a {
+  margin: 0 1rem;
+  text-decoration: none;
+  color: #007acc;
+}
+
+nav a:hover {
+  text-decoration: underline;
+}
+
+section {
+  background: white;
+  padding: 1rem 1.5rem;
+  margin-bottom: 2rem;
+  border-radius: 5px;
+  box-shadow: 0 0 5px #ccc;
+}
+
+h2 {
+  border-bottom: 2px solid #007acc;
+  padding-bottom: 0.3rem;
+  margin-bottom: 1rem;
+}
+
+form input, form textarea {
+  width: 100%;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  font-size: 1rem;
+}
+
+button {
+  background-color: #007acc;
+  color: white;
+  border: none;
+  padding: 0.7rem 1.5rem;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 3px;
+}
+
+button:hover {
+  background-color: #005fa3;
+}
+
+footer {
+  text-align: center;
+  font-size: 0.9rem;
+  color: #777;
+  margin-top: 3rem;
+}
