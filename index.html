@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Johannes — Portfolio</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <h1>Johannes</h1>
+      <nav><a href="#about">About</a> <a href="#work">Work</a> <a href="#contact">Contact</a></nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <h2>Hi — I'm Johannes</h2>
+        <p>Simple, responsive site editable in VS Code.</p>
+        <a class="btn" href="#contact">Get in touch</a>
+      </div>
+    </section>
+
+    <section id="about" class="container">
+      <h3>About</h3>
+      <p>Add a couple of lines about yourself here.</p>
+    </section>
+
+    <section id="work" class="container">
+      <h3>Work</h3>
+      <div class="cards">
+        <article class="card"><h4>Project A</h4><p>Short description.</p></article>
+        <article class="card"><h4>Project B</h4><p>Short description.</p></article>
+      </div>
+    </section>
+
+    <section id="contact" class="container">
+      <h3>Contact</h3>
+      <form id="contactForm">
+        <input name="name" placeholder="Name" required>
+        <input name="email" type="email" placeholder="Email" required>
+        <textarea name="message" placeholder="Message"></textarea>
+        <button type="submit">Send</button>
+      </form>
+    </section>
+  </main>
+
+  <footer class="site-footer"><div class="container">© Johannes 2025</div></footer>
+  <script src="script.js"></script>
+</body>
+</html>
