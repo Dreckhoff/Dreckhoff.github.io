@@ -2,25 +2,29 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Dreckhoff — Personal Website</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <header>
-    <h1>Dreckhoff</h1>
+    <h1>Johannes Dreckhoff</h1>
     <nav>
       <a href="#bio">Bio</a>
       <a href="#publications">Publications</a>
       <a href="#cv">CV</a>
       <a href="#contact">Contact</a>
     </nav>
+    <button id="theme-toggle" aria-label="Toggle dark mode">🌙</button>
   </header>
 
   <section id="bio">
     <h2>About Me</h2>
     <p>Hi, my name is Johannes, welcome to my website. I am a physics student at the university of Heidelberg, Germany. Currently, I am 
-        writing my master thesis in theoretical biophysics in the Schwarz group at the BioQuant.</p>
+        writing my master thesis in theoretical biophysics in the Schwarz group at the BioQuant. <br />
+
+        This website is a little project of mine, all work-in-progress. <br />
+    </p>
   </section>
 
 
@@ -86,7 +90,38 @@
 
   <section id="cv">
     <h2>Curriculum Vitae</h2>
-    <p><a href="cv.pdf" download>Download my CV (PDF)</a></p>
+    <h3><a href="cv.pdf" download> Download my compact CV (PDF)</a> or read a bit about me here:</h3>
+    <p> I was born on the 18th of January 2001 in Düsseldorf, Germany. I went to school at the <a href="https://tfg-duesseldorf.ekir.de">Theodor Fliedner Gymnasium</a>
+    and completed my Abitur in 2019. After that, I immediately moved to Heidelberg to study physics.
+      <br />
+    I completed my bachelor in 2023, writing my thesis under the supervision of Prof. Dr. Andreas Mielke on pattern formation
+    in lipid membranes. During my bachelor, I completed an exchange semester at the <a href="https://www.universiteitleiden.nl/en">University of Leiden</a>, Netherlands.
+    Besides meeting awesome people there, I got to experience the Dutch culture. From an academic perspective, I got the opportunity
+    to attend courses on the physics of finance, which I found particularly interesting.
+    <br />
+
+    After handing in my bachelor thesis, I immediately started my master in Heidelberg. I entered the group of <a href="https://www.thphys.uni-heidelberg.de/~biophys/">Prof. Dr.
+    Ulrich Schwarz</a> at the BioQuant, since I really liked the topic of theoretical biophysics during my bachelor. This is where
+    I am currently writing my master thesis on the curvature generation in clathrin-mediated endocytosis.
+    <br />
+
+    Besides my studies, I started playing ultimate frisbee in the last year which I really enjoy. I like cats, but love dogs even more.
+    I think Star Wars is better than Star Trek, and I love the Game of Thrones books. To cope with the missing 6th book, I started
+    reading the Wheel of Time, currently ongoing.
+
+    </p>
+    
+
+  
+  </section>
+
+  <section id="other-links">
+    <h2>Other Links</h2>
+    <ul>
+      <li><p> Find my code on <a href="https://github.com/Dreckhoff" target="_blank" rel="noopener noreferrer">GitHub</a></p></li>
+      <li><p> Visit me on <a href="https://www.linkedin.com/in/johannes-dreckhoff/" target="_blank" rel="noopener noreferrer">LinkedIn</a></p></li>
+      <li><p> Code with me on <a href="https://www.hackerrank.com/profile/jdreckhoff" target="_blank" rel="noopener noreferrer">HackerRank</a></p></li>
+    </ul>
   </section>
 
   <section id="contact">
@@ -114,5 +149,80 @@
   </footer>
 
 
+
+
+ <script>
+  const toggleButton = document.getElementById('theme-toggle');
+
+  // Apply saved theme on load
+  const savedTheme = localStorage.getItem('theme');
+  if (savedTheme) {
+    document.body.classList.add(savedTheme);
+  } else {
+    // No saved theme → follow system preference
+    if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      document.body.classList.add('dark-mode');
+    }
+  }
+
+  // Handle button click
+  toggleButton.addEventListener('click', () => {
+    if (document.body.classList.contains('dark-mode')) {
+      document.body.classList.remove('dark-mode');
+      document.body.classList.add('light-mode');
+      localStorage.setItem('theme', 'light-mode');
+      toggleButton.textContent = '🌙';
+    } else {
+      document.body.classList.remove('light-mode');
+      document.body.classList.add('dark-mode');
+      localStorage.setItem('theme', 'dark-mode');
+      toggleButton.textContent = '☀️';
+    }
+  });
+</script>
+
+
+<script>
+  function smoothScrollTo(targetY, duration = 800) {
+    const startY = window.pageYOffset;
+    const distance = targetY - startY;
+    let startTime = null;
+
+    function animation(currentTime) {
+      if (!startTime) startTime = currentTime;
+      const timeElapsed = currentTime - startTime;
+      const progress = Math.min(timeElapsed / duration, 1);
+
+      // easeInOutCubic easing function
+      const ease = progress < 0.5
+        ? 4 * progress * progress * progress
+        : 1 - Math.pow(-2 * progress + 2, 3) / 2;
+
+      window.scrollTo(0, startY + distance * ease);
+
+      if (timeElapsed < duration) {
+        requestAnimationFrame(animation);
+      }
+    }
+    requestAnimationFrame(animation);
+  }
+
+  document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      const targetID = this.getAttribute('href').substring(1);
+      const target = document.getElementById(targetID);
+      if (!target) return;
+
+      const headerOffset = document.querySelector('header').offsetHeight;
+      const elementPosition = target.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+      smoothScrollTo(offsetPosition, 500); // Duration in ms, here 1000 = 1 second
+    });
+  });
+</script>
+
+ 
 </body>
 </html>
