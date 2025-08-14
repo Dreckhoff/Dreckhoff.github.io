@@ -17,7 +17,8 @@
       <a href="#interests">Interests</a>
       <a href="#publications">Publications</a>
       <a href="#cv">CV</a>
-      <a href="#contact">Contact</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#contact">Connect</a>
     </nav>
     <button id="theme-toggle" aria-label="Toggle dark mode">🌙</button>
   </header>
@@ -29,8 +30,8 @@
       Currently, I am writing my master thesis in theoretical biophysics in the Schwarz group at the BioQuant.
     </p>
     <p>
-      This website is a little project of mine to showcase my academic work and research interests. 
-      Feel free to explore my publications, projects, and get in touch if you'd like to connect!
+      This website is a little project of mine to showcase my academic work, research as well as personal interests and a bit more
+      about myself. Feel free to explore my publications, projects, and get in touch if you'd like to connect!
     </p>
   </section>
 
@@ -143,29 +144,70 @@
   
   </section>
 
-  <section id="other-links">
-    <h2>Other Links</h2>
-    <ul>
-      <li><p> Find my code on <a href="https://github.com/Dreckhoff" target="_blank" rel="noopener noreferrer">GitHub</a></p></li>
-      <li><p> Visit me on <a href="https://www.linkedin.com/in/johannes-dreckhoff/" target="_blank" rel="noopener noreferrer">LinkedIn</a></p></li>
-      <li><p> Code with me on <a href="https://www.hackerrank.com/profile/jdreckhoff" target="_blank" rel="noopener noreferrer">HackerRank</a></p></li>
-    </ul>
+  <section id="gallery">
+    <h2>Gallery</h2>
+    <p>To get an impression of me.</p>
+    <div class="gallery-grid">
+      <div class="gallery-item">
+        <img src="sending_love.jpeg" alt="Sending love in Elsass" loading="lazy">
+        <div class="gallery-overlay">
+          <h4>Elsass</h4>
+          <p>Sending a heart to my dear friends</p>
+        </div>
+      </div>
+      <div class="gallery-item">
+        <img src="doing_research.jpeg" alt="Research work" loading="lazy">
+        <div class="gallery-overlay">
+          <h4>Doing Research</h4>
+          <p>while maintaining a top posture</p>
+        </div>
+      </div>
+      <div class="gallery-item">
+        <img src="in_a_church.jpeg" alt="In a church" loading="lazy">
+        <div class="gallery-overlay">
+          <h4>In a Church</h4>
+          <p>where it was really quiet</p>
+        </div>
+      </div>
+      <div class="gallery-item">
+        <img src="wet_heidelberg.jpeg" alt="Wet Heidelberg" loading="lazy">
+        <div class="gallery-overlay">
+          <h4>Wet Heidelberg</h4>
+          <p>after some very rainy days</p>
+        </div>
+      </div>
+    </div>
   </section>
 
   <section id="contact">
-    <h2>Contact Me</h2>
-    <form action="https://formspree.io/f/xwpqyepk" method="POST">
-      <label for="name">Name:</label>
-      <input type="text" id="name" name="name" required />
+    <h2>Contact & Connect</h2>
+    
+    <div class="contact-container">
+      <div class="contact-links">
+        <h3>Find me online</h3>
+        <ul>
+          <li><p> Find my code on <a href="https://github.com/Dreckhoff" target="_blank" rel="noopener noreferrer">GitHub</a></p></li>
+          <li><p> Visit me on <a href="https://www.linkedin.com/in/johannes-dreckhoff/" target="_blank" rel="noopener noreferrer">LinkedIn</a></p></li>
+          <li><p> Code with me on <a href="https://www.hackerrank.com/profile/jdreckhoff" target="_blank" rel="noopener noreferrer">HackerRank</a></p></li>
+        </ul>
+      </div>
+      
+      <div class="contact-form">
+        <h3>Send me a message</h3>
+        <form action="https://formspree.io/f/xwpqyepk" method="POST">
+          <label for="name">Name:</label>
+          <input type="text" id="name" name="name" required />
 
-      <label for="email">Email:</label>
-      <input type="email" id="email" name="_replyto" required />
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="_replyto" required />
 
-      <label for="message">Message:</label>
-      <textarea id="message" name="message" rows="5" required></textarea>
+          <label for="message">Message:</label>
+          <textarea id="message" name="message" rows="5" required></textarea>
 
-      <button type="submit">Send Message</button>
-    </form>
+          <button type="submit">Send Message</button>
+        </form>
+      </div>
+    </div>
   </section>
 
   <footer>
