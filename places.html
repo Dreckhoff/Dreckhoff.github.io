@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lovely and Intersting Places – Johannes Dreckhoff</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* Make header more compact for places page */
+    header {
+      padding: 0.75rem 0 !important;
+      margin-bottom: 1rem !important;
+      position: relative;
+    }
+    header h1 {
+      font-size: 1.5rem !important;
+      margin: 0 0 0.5rem 0 !important;
+    }
+    nav {
+      margin: 0 !important;
+      gap: 1rem !important;
+    }
+    nav a {
+      font-size: 0.9rem !important;
+      padding: 0.375rem 0.75rem !important;
+    }
+    
+    /* Theme toggle button */
+    #theme-toggle {
+      position: absolute !important;
+      top: 0.75rem !important;
+      right: 1rem !important;
+      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)) !important;
+      border: none !important;
+      border-radius: 50% !important;
+      width: 2.25rem !important;
+      height: 2.25rem !important;
+      font-size: 0.9rem !important;
+      cursor: pointer !important;
+      transition: var(--transition) !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      color: white !important;
+      box-shadow: var(--shadow-light) !important;
+    }
+    
+    .places-container {
+      max-width: 1000px;
+      margin: 1rem auto;
+      padding: 0 1rem;
+    }
+    
+    .places-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+    
+    .place-card {
+      background: var(--background-primary);
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      box-shadow: var(--shadow-light);
+      border: 1px solid var(--border-color);
+      transition: var(--transition);
+      position: relative;
+    }
+    
+    .place-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-medium);
+    }
+    
+    /* Visited place styling */
+    .place-card[data-visited="true"] {
+      border: 2px solid var(--primary-color);
+    }
+    
+    .place-card[data-visited="true"] .place-name {
+      color: var(--secondary-color);
+    }
+    
+    /* Checkmark badge for visited places */
+    .visited-badge {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: var(--primary-color);
+      color: white;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      font-weight: bold;
+      box-shadow: var(--shadow-medium);
+      z-index: 10;
+      opacity: 0;
+      transform: scale(0);
+      transition: var(--transition);
+    }
+    
+    .place-card[data-visited="true"] .visited-badge {
+      opacity: 1;
+      transform: scale(1);
+    }
+    
+    .place-image {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-bottom: 1px solid var(--border-color);
+    }
+    
+    .place-content {
+      padding: 1.5rem;
+    }
+    
+    .place-name {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--primary-color);
+      margin: 0 0 1rem 0;
+    }
+    
+    .place-info {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+    
+    .weather-info, .time-info {
+      background: var(--background-secondary);
+      padding: 1rem;
+      border-radius: var(--border-radius);
+      text-align: center;
+    }
+    
+    .weather-temp {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--primary-color);
+      margin: 0.5rem 0;
+    }
+    
+    .weather-desc {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      text-transform: capitalize;
+    }
+    
+    .local-time {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--primary-color);
+      margin: 0.5rem 0;
+    }
+    
+    .time-zone {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+    }
+    
+    .loading {
+      color: var(--text-secondary);
+      font-style: italic;
+    }
+    
+    .error {
+      color: #e74c3c;
+      font-size: 0.9rem;
+    }
+    
+    @media (max-width: 768px) {
+      .places-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+      
+      .place-info {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Lovely and Interesting Places</h1>
+    <nav>
+      <a href="index.html">← Back to Main Page</a>
+    </nav>
+    <button id="theme-toggle" aria-label="Toggle dark mode">🌙</button>
+  </header>
+  
+  <main>
+    <div class="places-container">
+      <div style="text-align: center; margin-bottom: 2rem;">
+        <p style="font-size: 1.1rem;">
+          These are some amazing places around the world I dream of visiting or have already visited. Each card shows the current weather and local time to help imagine what it would be like to be there right now, and shows
+          whether I have been there or not!
+        </p>
+      </div>
+      
+      <div class="places-grid">
+        <div class="place-card" data-city="Zurich" data-country="CH" data-timezone="Europe/Zurich" data-visited="false">
+          <div class="visited-badge">✓</div>
+          <img src="zurich.jpg" alt="Zurich, Switzerland" class="place-image">
+          <div class="place-content">
+            <h3 class="place-name">Zurich, Switzerland</h3>
+            <p>Between mountains and lakes, Zurich is a city where I can imagine myself living.</p>
+            <div class="place-info">
+              <div class="weather-info">
+                <div>🌤️ Weather</div>
+                <div class="weather-temp loading">Loading...</div>
+                <div class="weather-desc"></div>
+              </div>
+              <div class="time-info">
+                <div>🕐 Local Time</div>
+                <div class="local-time loading">Loading...</div>
+                <div class="time-zone">Europe/Zurich</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="place-card" data-city="Chicago" data-country="US" data-timezone="America/Chicago" data-visited="false">
+          <div class="visited-badge">✓</div>
+          <img src="chicago.jpg" alt="Chicago, USA" class="place-image">
+          <div class="place-content">
+            <h3 class="place-name">Chicago, USA</h3>
+            <p>The Windy City across the great lake with incredible architecture.</p>
+            <div class="place-info">
+              <div class="weather-info">
+                <div>🌤️ Weather</div>
+                <div class="weather-temp loading">Loading...</div>
+                <div class="weather-desc"></div>
+              </div>
+              <div class="time-info">
+                <div>🕐 Local Time</div>
+                <div class="local-time loading">Loading...</div>
+                <div class="time-zone">America/Chicago</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="place-card" data-city="Munich" data-country="DE" data-timezone="Europe/Berlin" data-visited="true">
+          <div class="visited-badge">✓</div>
+          <img src="munich.jpg" alt="Munich, Germany" class="place-image">
+          <div class="place-content">
+            <h3 class="place-name">Munich, Germany</h3>
+            <p>I love the bavarian culture, beer gardens, the beautiful scenery and landscapes</p>
+            <div class="place-info">
+              <div class="weather-info">
+                <div>🌤️ Weather</div>
+                <div class="weather-temp loading">Loading...</div>
+                <div class="weather-desc"></div>
+              </div>
+              <div class="time-info">
+                <div>🕐 Local Time</div>
+                <div class="local-time loading">Loading...</div>
+                <div class="time-zone">Europe/Berlin</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="place-card" data-city="Vienna" data-country="AT" data-timezone="Europe/Vienna" data-visited="false">
+          <div class="visited-badge">✓</div>
+          <img src="vienna.jpg" alt="Vienna, Austria" class="place-image">
+          <div class="place-content">
+            <h3 class="place-name">Vienna, Austria</h3>
+            <p>The city of culture, whether it be music, art or coffee.</p>
+            <div class="place-info">
+              <div class="weather-info">
+                <div>🌤️ Weather</div>
+                <div class="weather-temp loading">Loading...</div>
+                <div class="weather-desc"></div>
+              </div>
+              <div class="time-info">
+                <div>🕐 Local Time</div>
+                <div class="local-time loading">Loading...</div>
+                <div class="time-zone">Europe/Vienna</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="place-card" data-city="Paris" data-country="FR" data-timezone="Europe/Paris" data-visited="true">
+          <div class="visited-badge">✓</div>
+          <img src="paris.jpg" alt="Paris, France" class="place-image">
+          <div class="place-content">
+            <h3 class="place-name">Paris, France</h3>
+            <p>I love the french culture, and Paris just has so much to explore.</p>
+            <div class="place-info">
+              <div class="weather-info">
+                <div>🌤️ Weather</div>
+                <div class="weather-temp loading">Loading...</div>
+                <div class="weather-desc"></div>
+              </div>
+              <div class="time-info">
+                <div>🕐 Local Time</div>
+                <div class="local-time loading">Loading...</div>
+                <div class="time-zone">Europe/Paris</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="place-card" data-city="Heidelberg" data-country="DE" data-timezone="Europe/Berlin" data-visited="true">
+          <div class="visited-badge">✓</div>
+          <img src="heidelberg.jpeg" alt="Heidelberg, Germany" class="place-image">
+          <div class="place-content">
+            <h3 class="place-name">Heidelberg, Germany</h3>
+            <p>My beautiful university city with its castle, old town and many of my friends.</p>
+            <div class="place-info">
+              <div class="weather-info">
+                <div>🌤️ Weather</div>
+                <div class="weather-temp loading">Loading...</div>
+                <div class="weather-desc"></div>
+              </div>
+              <div class="time-info">
+                <div>🕐 Local Time</div>
+                <div class="local-time loading">Loading...</div>
+                <div class="time-zone">Europe/Berlin</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="place-card" data-city="London" data-country="GB" data-timezone="Europe/London" data-visited="true">
+          <div class="visited-badge">✓</div>
+          <img src="london.jpg" alt="London, United Kingdom" class="place-image">
+          <div class="place-content">
+            <h3 class="place-name">London, United Kingdom</h3>
+            <p>The british hustle and bustle is just something else.</p>
+            <div class="place-info">
+              <div class="weather-info">
+                <div>🌤️ Weather</div>
+                <div class="weather-temp loading">Loading...</div>
+                <div class="weather-desc"></div>
+              </div>
+              <div class="time-info">
+                <div>🕐 Local Time</div>
+                <div class="local-time loading">Loading...</div>
+                <div class="time-zone">Europe/London</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="place-card" data-city="Tokyo" data-country="JP" data-timezone="Asia/Tokyo" data-visited="false">
+          <div class="visited-badge">✓</div>
+          <img src="tokyo.jpg" alt="Tokyo, Japan" class="place-image">
+          <div class="place-content">
+            <h3 class="place-name">Tokyo, Japan</h3>
+            <p>Once in my life, I would really love to visit Tokyo, just to see what is different there.</p>
+            <div class="place-info">
+              <div class="weather-info">
+                <div>🌤️ Weather</div>
+                <div class="weather-temp loading">Loading...</div>
+                <div class="weather-desc"></div>
+              </div>
+              <div class="time-info">
+                <div>🕐 Local Time</div>
+                <div class="local-time loading">Loading...</div>
+                <div class="time-zone">Asia/Tokyo</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  
+  <script>
+    // Theme toggle functionality (consistent with other pages)
+    document.addEventListener('DOMContentLoaded', function() {
+      const toggleButton = document.getElementById('theme-toggle');
+      
+      // Apply saved theme on load
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme) {
+        document.body.classList.add(savedTheme);
+        updateToggleButton();
+      } else {
+        // No saved theme → follow system preference
+        if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+          document.body.classList.add('dark-mode');
+          updateToggleButton();
+        }
+      }
+
+      // Handle button click
+      toggleButton.addEventListener('click', () => {
+        if (document.body.classList.contains('dark-mode')) {
+          document.body.classList.remove('dark-mode');
+          document.body.classList.add('light-mode');
+          localStorage.setItem('theme', 'light-mode');
+        } else {
+          document.body.classList.remove('light-mode');
+          document.body.classList.add('dark-mode');
+          localStorage.setItem('theme', 'dark-mode');
+        }
+        updateToggleButton();
+      });
+
+      function updateToggleButton() {
+        if (document.body.classList.contains('dark-mode')) {
+          toggleButton.textContent = '☀️';
+          toggleButton.setAttribute('aria-label', 'Switch to light mode');
+        } else {
+          toggleButton.textContent = '🌙';
+          toggleButton.setAttribute('aria-label', 'Switch to dark mode');
+        }
+      }
+    });
+    
+    // Weather and time functionality
+    document.addEventListener('DOMContentLoaded', async function() {
+      const places = document.querySelectorAll('.place-card');
+      
+      // Update local times
+      function updateTimes() {
+        places.forEach(place => {
+          const timezone = place.dataset.timezone;
+          const timeElement = place.querySelector('.local-time');
+          
+          try {
+            const now = new Date();
+            const localTime = now.toLocaleTimeString('en-US', {
+              timeZone: timezone,
+              hour: '2-digit',
+              minute: '2-digit',
+              hour12: true
+            });
+            timeElement.textContent = localTime;
+            timeElement.classList.remove('loading');
+          } catch (error) {
+            timeElement.textContent = 'Time unavailable';
+            timeElement.classList.remove('loading');
+            timeElement.classList.add('error');
+          }
+        });
+      }
+      
+      // Update weather data
+      async function updateWeather() {
+        for (const place of places) {
+          const city = place.dataset.city;
+          const tempElement = place.querySelector('.weather-temp');
+          const descElement = place.querySelector('.weather-desc');
+          
+          try {
+            // Using OpenWeatherMap API (you'll need to replace YOUR_API_KEY)
+            // For demo purposes, we'll use mock data
+            // const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=YOUR_API_KEY&units=metric`);
+            // const data = await response.json();
+            
+            // Mock weather data for demo
+            const mockWeather = {
+              Zurich: { temp: 15, desc: 'partly cloudy' },
+              Chicago: { temp: 22, desc: 'sunny' },
+              Munich: { temp: 18, desc: 'light rain' },
+              Vienna: { temp: 20, desc: 'clear sky' },
+              Paris: { temp: 17, desc: 'overcast' },
+              Heidelberg: { temp: 19, desc: 'partly cloudy' },
+              London: { temp: 14, desc: 'drizzle' },
+              Tokyo: { temp: 26, desc: 'humid and warm' }
+            };
+            
+            const weather = mockWeather[city];
+            if (weather) {
+              tempElement.textContent = `${weather.temp}°C`;
+              descElement.textContent = weather.desc;
+              tempElement.classList.remove('loading');
+            } else {
+              tempElement.textContent = 'N/A';
+              descElement.textContent = 'Weather unavailable';
+              tempElement.classList.remove('loading');
+              tempElement.classList.add('error');
+            }
+          } catch (error) {
+            tempElement.textContent = 'N/A';
+            descElement.textContent = 'Weather unavailable';
+            tempElement.classList.remove('loading');
+            tempElement.classList.add('error');
+          }
+        }
+      }
+      
+      // Initial load
+      updateTimes();
+      updateWeather();
+      
+      // Update times every minute
+      setInterval(updateTimes, 60000);
+      
+      // Update weather every 10 minutes
+      setInterval(updateWeather, 600000);
+    });
+  </script>
+</body>
+</html>
