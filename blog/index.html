@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Blog posts and writings by Johannes Dreckhoff on physics, research, and life">
+  <title>Blog - Johannes Dreckhoff</title>
+  <link rel="stylesheet" href="../css/main.css">
+  <style>
+    .blog-list {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .blog-post-item {
+      background: var(--background-primary);
+      border: 1px solid var(--border-color);
+      border-radius: var(--border-radius-lg);
+      padding: 2rem;
+      margin-bottom: 2rem;
+      transition: var(--transition);
+    }
+
+    .blog-post-item:hover {
+      box-shadow: var(--shadow-lg);
+      transform: translateY(-4px);
+    }
+
+    .blog-post-item h3 {
+      margin-bottom: 0.5rem;
+    }
+
+    .blog-post-item h3 a {
+      color: var(--text-primary);
+      text-decoration: none;
+    }
+
+    .blog-post-item h3 a:hover {
+      color: var(--primary-color);
+    }
+
+    .blog-meta {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .blog-category {
+      background: var(--background-secondary);
+      padding: 0.25rem 0.75rem;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      color: var(--primary-color);
+      font-weight: 600;
+    }
+
+    .blog-excerpt {
+      color: var(--text-secondary);
+      line-height: 1.7;
+      margin-bottom: 1rem;
+    }
+
+    .read-more {
+      color: var(--primary-color);
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    .read-more:hover {
+      color: var(--primary-hover);
+    }
+  </style>
+</head>
+<body>
+  <!-- Header & Navigation -->
+  <header>
+    <div class="container">
+      <a href="../index.html" class="logo">Johannes Dreckhoff</a>
+      <nav>
+        <a href="../index.html#about">About</a>
+        <a href="../index.html#professional">Professional</a>
+        <a href="../index.html#gallery">Gallery</a>
+        <a href="../places.html">Places</a>
+        <a href="index.html">Blog</a>
+        <a href="../index.html#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <section style="padding: 4rem 0;">
+    <div class="container">
+      <div class="section-header">
+        <h2>Blog & Writing</h2>
+        <p>Thoughts on science, research, books, and life</p>
+      </div>
+
+      <div class="blog-list">
+        <!-- Blog Post 1 -->
+        <article class="blog-post-item">
+          <h3><a href="welcome.html">Welcome to My Blog</a></h3>
+          <div class="blog-meta">
+            <span>February 4, 2026</span>
+            <span class="blog-category">General</span>
+            <span>2 min read</span>
+          </div>
+          <p class="blog-excerpt">
+            This is the beginning of my writing journey. I plan to share thoughts on physics, research, 
+            books I'm reading, and interesting things I come across. Join me as I explore ideas and share 
+            insights from my academic and personal life.
+          </p>
+          <a href="welcome.html" class="read-more">Read more →</a>
+        </article>
+
+        <!-- More blog posts will be added here as you write them -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p>&copy; 2026 Johannes Dreckhoff. All rights reserved.</p>
+      <p><a href="../impressum.html">Impressum</a></p>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>

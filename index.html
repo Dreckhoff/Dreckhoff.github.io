@@ -1,242 +1,272 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Johannes Dreckhoff — Personal Website</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Johannes Dreckhoff - Physics student, researcher, and science enthusiast. Exploring theoretical biophysics and computational modeling.">
+  <meta name="author" content="Johannes Dreckhoff">
+  <title>Johannes Dreckhoff - Physics & Research</title>
+  <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
+  <!-- Header & Navigation -->
   <header>
-    <h1>Johannes Dreckhoff</h1>
-    <div class="ai-draw-hint" style="text-align:center; font-size:1.05rem; color:var(--primary-color,#ff6b6b); margin-bottom:0.5rem;">
-      🎨 Try the AI Drawing Game: Draw something and let an AI guess what it is!
+    <div class="container">
+      <a href="#" class="logo">Johannes Dreckhoff</a>
+      <nav>
+        <a href="#about">About</a>
+        <a href="#professional">Professional</a>
+        <a href="#gallery">Gallery</a>
+        <a href="places.html">Places</a>
+        <a href="blog/index.html">Blog</a>
+        <a href="#contact">Contact</a>
+      </nav>
     </div>
-    <nav>
-      <a href="#bio">Bio</a>
-      <a href="#interests">Interests</a>
-      <a href="#publications">Publications</a>
-      <a href="#cv">CV</a>
-      <a href="#gallery">Gallery</a>
-      <a href="#draw">AI Drawing Game</a>
-      <a href="#places">Lovely Places</a>
-      <a href="#contact">Connect</a>
-    </nav>
-    <button id="theme-toggle" aria-label="Toggle dark mode">🌙</button>
   </header>
 
-  <section id="bio">
-    <h2>About Me</h2>
-    <p>
-      Hi, my name is Johannes, welcome to my website! I am a physics student at the University of Heidelberg, Germany. 
-      Currently, I am writing my master thesis in theoretical biophysics in the Schwarz group at the BioQuant.
-    </p>
-    <p>
-      This website is a little project of mine to showcase my academic work, research as well as personal interests and a bit more
-      about myself. Feel free to explore my publications, projects, and get in touch if you'd like to connect!
-    </p>
-  </section>
-
-  <section id="interests">
-    <h2>My Interests</h2>
-    <div class="interests-grid">
-      <div class="interest-card">
-        <div class="interest-icon">⚛️</div>
-        <h3>Theoretical Physics</h3>
-        <p>Exploring the fundamental principles of nature through mathematical frameworks and theoretical models.</p>
-      </div>
-      <div class="interest-card">
-        <div class="interest-icon">💻</div>
-        <h3>Coding & AI</h3>
-        <p>Developing computational solutions and exploring artificial intelligence applications in scientific research.</p>
-      </div>
-      <div class="interest-card">
-        <div class="interest-icon">📊</div>
-        <h3>Mathematical Modeling</h3>
-        <p>Creating mathematical representations of complex biological and physical systems to understand their behavior.</p>
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container">
+      <h1>Hi, I'm Johannes</h1>
+      <p class="tagline">Physics student at the University of Heidelberg, researching theoretical biophysics and exploring the fascinating intersection of mathematics, computation, and life sciences.</p>
+      <div class="cta-buttons">
+        <a href="#about" class="btn btn-primary">Learn More</a>
+        <a href="assets/documents/cv.pdf" class="btn btn-secondary" target="_blank">Download CV</a>
       </div>
     </div>
   </section>
 
-
-  <section id="publications">
-  <h2>Projects, Research & Publications</h2>
-
-  <article>
-    <h3 id="bachelor-thesis">Bachelor Thesis</h3>
-    <p>
-        I wrote my bachelor thesis in 2023 under the supervision of Prof. Dr. Andreas Mielke at the institute for theoretical
-        physics in Heidelberg, Germany. I wanted to tackle the question: "Why is everything we see in nature so sharp?" If you look
-        at the stripes of a zebra, why isn't there a blurry mess? <br />
-
-        In non-technical terms, think of a stadium packed with people. Every possible pattern is like a different chant trying to get started in the crowd. 
-        So how does one chant take over the whole stadium?
-        It turns out that the competition between different chants is selecting the most popular one. People around it are not only
-        hearing it, their chant is actively shut down, they stop and join in (in technical terms, nonlinear feedback suppression).
-        This mechanism selects a single chant in the end, and the whole stadium is chanting the same thing. <br />
-
-        I could show that this essentially happens in cell membranes in the case of pattern formation in lipid cell membranes.
-    </p>
-
-    <ul>
-      <li><a href="bachelor-thesis.pdf" target="_blank" rel="noopener noreferrer" download>Download PDF</a></li>
-      <li>
-        Listen to the audio summary in german, generated by NotebookLM:<br />
-        <audio controls>
-          <source src="ger-audio-summary.mp3" type="audio/mpeg" />
-          Your browser does not support the audio element.
-        </audio>
-        </li>
-        <li>
-        Listen to the audio summary in english, generated by NotebookLM:<br />
-        <audio controls>
-          <source src="eng-audio-summary.mp3" type="audio/mpeg" />
-          Your browser does not support the audio element.
-        </audio>
-      </li>
-    </ul>
-  </article>
-
-  <article>
-    <h3 id="master-thesis">Master Thesis</h3>
-    <p>
-      I am currently working on my master thesis in the field of theoretical and computational biophysics in the
-      Schwarz group at the BioQuant in Heidelberg. My research focuses on the curvature generation during
-      clathrin-mediated endocytosis. Basically, the cell has too little interest in wrapping around stuff it wants to eat,
-      so it gets help from a protein called clathrin, that forms a grid on the cell membrane that eventually starts to bend.
-      But the details of how and why are not yet understood completely. <br />
-
-      I am tackling this problem by writing a programm that should simulate the accumulation of clathrin as well as the generation
-      of curvature during endocytosis (the process in which the cell wraps around the stuff it wants to eat). For this, I am
-      using an (i.m.o.) interesting approach with JAX (a programming library usually used for machine learning) together 
-      with pythons object-oriented programming style, to create an easy-to-manage software that is still very fast. <br />
-
-      Currently, the project is still going on, but I will update this section at the given time.
-    </p>
-  </article>
-
-  <!-- Add more publications here -->
-</section>
-
-
-  <section id="cv">
-    <h2>Curriculum Vitae</h2>
-    <h3><a href="cv.pdf" download> Download my compact CV (PDF)</a> or read a bit about me here:</h3>
-    <p> I was born on the 18th of January 2001 in Düsseldorf, Germany. I went to school at the <a href="https://tfg-duesseldorf.ekir.de">Theodor Fliedner Gymnasium</a>
-    and completed my Abitur in 2019. After that, I immediately moved to Heidelberg to study physics.
-      <br />
-    I completed my bachelor in 2023, writing my thesis under the supervision of Prof. Dr. Andreas Mielke on pattern formation
-    in lipid membranes. During my bachelor, I completed an exchange semester at the <a href="https://www.universiteitleiden.nl/en">University of Leiden</a>, Netherlands.
-    Besides meeting awesome people there, I got to experience the Dutch culture. From an academic perspective, I got the opportunity
-    to attend courses on the physics of finance, which I found particularly interesting.
-    <br />
-
-    After handing in my bachelor thesis, I immediately started my master in Heidelberg. I entered the group of <a href="https://www.thphys.uni-heidelberg.de/~biophys/">Prof. Dr.
-    Ulrich Schwarz</a> at the BioQuant, since I really liked the topic of theoretical biophysics during my bachelor. This is where
-    I am currently writing my master thesis on the curvature generation in clathrin-mediated endocytosis.
-    <br />
-
-    Besides my studies, I started playing ultimate frisbee in the last year which I really enjoy. I like cats, but love dogs even more.
-    I think Star Wars is better than Star Trek, and I love the Game of Thrones books. To cope with the missing 6th book, I started
-    reading the Wheel of Time, currently ongoing.
-
-    </p>
-    
-
-  
+  <!-- Personal Bio Section -->
+  <section id="about">
+    <div class="container">
+      <div class="section-header">
+        <h2>About Me</h2>
+        <p>Get to know me beyond the lab and lecture halls</p>
+      </div>
+      <div class="bio-content">
+        <p>
+          Welcome to my website! I'm Johannes, a physics student at the University of Heidelberg, Germany. 
+          I was born on January 18th, 2001 in Düsseldorf, and after completing my Abitur in 2019, I moved to 
+          Heidelberg to pursue my passion for physics.
+        </p>
+        <p>
+          During my bachelor studies, I had the wonderful opportunity to spend a semester at the University of 
+          Leiden in the Netherlands. Beyond meeting incredible people and experiencing Dutch culture, I explored 
+          fascinating topics like the physics of finance, which opened my eyes to the diverse applications of 
+          physical principles.
+        </p>
+        <p>
+          Outside of academia, I've recently discovered ultimate frisbee, which I absolutely love. I'm a dog 
+          person (though I like cats too!), believe Star Wars is superior to Star Trek, and I'm deeply invested 
+          in the Game of Thrones books. While waiting for the elusive 6th book, I've been making my way through 
+          the Wheel of Time series.
+        </p>
+        <p>
+          This website is my corner of the internet where I share my academic work, research interests, personal 
+          adventures, and thoughts on topics I find fascinating. Feel free to explore and don't hesitate to reach out!
+        </p>
+      </div>
+    </div>
   </section>
 
+  <!-- Professional Bio Section -->
+  <section id="professional">
+    <div class="container">
+      <div class="section-header">
+        <h2>Professional Background</h2>
+        <p>My academic journey and research work</p>
+      </div>
+      <div class="bio-content">
+        <h3>Education</h3>
+        <p>
+          I completed my bachelor's degree in physics in 2023, writing my thesis under the supervision of 
+          Prof. Dr. Andreas Mielke on pattern formation in lipid membranes. The research tackled a fascinating 
+          question: "Why is everything we see in nature so sharp?" Think of zebra stripes - why aren't they a 
+          blurry mess?
+        </p>
+        <p>
+          In my thesis, I explored how patterns emerge in cell membranes through nonlinear feedback suppression, 
+          similar to how a single chant can take over an entire stadium. It's a mechanism where competing patterns 
+          actively suppress each other until one dominant pattern emerges.
+        </p>
+
+        <h3>Current Research</h3>
+        <p>
+          I'm currently pursuing my master's degree and working on my thesis in the Schwarz group at the BioQuant 
+          in Heidelberg. My research focuses on curvature generation during clathrin-mediated endocytosis - essentially 
+          studying how cells wrap around things they want to "eat" with the help of clathrin proteins.
+        </p>
+        <p>
+          For this project, I'm developing simulation software using JAX (typically used for machine learning) 
+          combined with Python's object-oriented programming. This approach allows me to create fast, efficient 
+          simulations while maintaining clean, manageable code. It's an exciting blend of computational physics, 
+          biophysics, and software engineering.
+        </p>
+
+        <h3>Resources</h3>
+        <div class="grid grid-2" style="margin-top: 2rem;">
+          <div class="card">
+            <h4>Bachelor Thesis</h4>
+            <p style="color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 1rem;">
+              Pattern Formation in Lipid Membranes
+            </p>
+            <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+              <a href="assets/documents/bachelor-thesis.pdf" target="_blank" class="btn btn-primary">Download PDF</a>
+              <details style="margin-top: 0.5rem;">
+                <summary style="cursor: pointer; color: var(--primary-color); font-weight: 600;">Audio Summaries</summary>
+                <div style="margin-top: 1rem;">
+                  <p style="font-size: 0.9rem; margin-bottom: 0.5rem;">German (NotebookLM):</p>
+                  <audio controls style="width: 100%; margin-bottom: 1rem;">
+                    <source src="assets/documents/ger-audio-summary.mp3" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                  </audio>
+                  <p style="font-size: 0.9rem; margin-bottom: 0.5rem;">English (NotebookLM):</p>
+                  <audio controls style="width: 100%;">
+                    <source src="assets/documents/eng-audio-summary.mp3" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                  </audio>
+                </div>
+              </details>
+            </div>
+          </div>
+          <div class="card">
+            <h4>Curriculum Vitae</h4>
+            <p style="color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 1rem;">
+              Complete academic and professional background
+            </p>
+            <a href="assets/documents/cv.pdf" target="_blank" class="btn btn-primary">Download CV</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Gallery Section -->
   <section id="gallery">
-    <h2>Gallery</h2>
-    <p>To get an impression of me.</p>
-    <div class="gallery-grid">
-      <div class="gallery-item">
-        <img src="sending_love.jpeg" alt="Sending love in Elsass" loading="lazy">
-        <div class="gallery-overlay">
-          <h4>Elsass</h4>
-          <p>Sending a heart to my dear friends</p>
-        </div>
+    <div class="container">
+      <div class="section-header">
+        <h2>Gallery</h2>
+        <p>Some snapshots from my life and travels</p>
       </div>
-      <div class="gallery-item">
-        <img src="doing_research.jpeg" alt="Research work" loading="lazy">
-        <div class="gallery-overlay">
-          <h4>Doing Research</h4>
-          <p>while maintaining a top posture</p>
+      <div class="gallery-grid">
+        <div class="gallery-item">
+          <img src="assets/gallery/sending_love.jpeg" alt="Sending love in Elsass" loading="lazy">
+          <div class="gallery-overlay">
+            <h4>Elsass</h4>
+            <p>Sending a heart to my dear friends</p>
+          </div>
         </div>
-      </div>
-      <div class="gallery-item">
-        <img src="in_a_church.jpeg" alt="In a church" loading="lazy">
-        <div class="gallery-overlay">
-          <h4>In a Church</h4>
-          <p>where it was really quiet</p>
+        <div class="gallery-item">
+          <img src="assets/gallery/doing_research.jpeg" alt="Research work" loading="lazy">
+          <div class="gallery-overlay">
+            <h4>Doing Research</h4>
+            <p>While maintaining top posture</p>
+          </div>
         </div>
-      </div>
-      <div class="gallery-item">
-        <img src="wet_heidelberg.jpeg" alt="Wet Heidelberg" loading="lazy">
-        <div class="gallery-overlay">
-          <h4>Wet Heidelberg</h4>
-          <p>after some very rainy days</p>
+        <div class="gallery-item">
+          <img src="assets/gallery/in_a_church.jpeg" alt="In a church" loading="lazy">
+          <div class="gallery-overlay">
+            <h4>In a Church</h4>
+            <p>Where it was really quiet</p>
+          </div>
+        </div>
+        <div class="gallery-item">
+          <img src="assets/gallery/wet_heidelberg.jpeg" alt="Wet Heidelberg" loading="lazy">
+          <div class="gallery-overlay">
+            <h4>Wet Heidelberg</h4>
+            <p>After some very rainy days</p>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-    <section id="draw">
-      <h2>Draw & Let AI Guess!</h2>
-      <p>Challenge our AI: Draw anything you like and see if it can guess what you created. Fun, creative, and powered by machine learning!</p>
-      <a href="draw.html" class="draw-link">
-        <button type="button">Try the AI Drawing Game</button>
-      </a>
-    </section>
-
-  <section id="places">
-    <h2>Places I find beautiful and interesting</h2>
-    <p>I am dreaming of seing something of the world! Whether these are places I already know
-      or new ones I want to explore, come check them out!</p>
-    <a href="places.html" class="places-link">
-      <button type="button">Explore some lovely Destinations</button>
-    </a>
+  <!-- Places Teaser Section -->
+  <section id="places-teaser" style="background: var(--background-primary);">
+    <div class="container">
+      <div class="section-header">
+        <h2>Places I Dream of Visiting</h2>
+        <p>Exploring beautiful destinations around the world</p>
+      </div>
+      <div class="bio-content" style="text-align: center;">
+        <p>
+          I've always been fascinated by different cities and cultures around the world. I've compiled a collection 
+          of places I've visited or dream of exploring, complete with live weather updates and local times to help 
+          imagine what it's like to be there right now.
+        </p>
+        <a href="places.html" class="btn btn-primary" style="margin-top: 1rem;">Explore Places</a>
+      </div>
+    </div>
   </section>
 
-  <section id="contact">
-    <h2>Contact & Connect</h2>
-    
-    <div class="contact-container">
-      <div class="contact-links">
-        <h3>Find me online</h3>
-        <ul>
-          <li><p> Find my code on <a href="https://github.com/Dreckhoff" target="_blank" rel="noopener noreferrer">GitHub</a></p></li>
-          <li><p> Visit me on <a href="https://www.linkedin.com/in/johannes-dreckhoff/" target="_blank" rel="noopener noreferrer">LinkedIn</a></p></li>
-          <li><p> Code with me on <a href="https://www.hackerrank.com/profile/jdreckhoff" target="_blank" rel="noopener noreferrer">HackerRank</a></p></li>
-        </ul>
+  <!-- Blog Preview Section -->
+  <section id="blog">
+    <div class="container">
+      <div class="section-header">
+        <h2>Thoughts & Writing</h2>
+        <p>Sharing ideas and reflections on science, life, and everything in between</p>
       </div>
-      
-      <div class="contact-form">
-        <h3>Send me a message</h3>
+      <div class="blog-preview-grid">
+        <div class="blog-card">
+          <h3><a href="blog/welcome.html">Welcome to My Blog</a></h3>
+          <div class="blog-meta">February 4, 2026 · 2 min read</div>
+          <p class="blog-excerpt">
+            This is the beginning of my writing journey. I plan to share thoughts on physics, research, 
+            books I'm reading, and interesting things I come across. Stay tuned for more!
+          </p>
+          <a href="blog/welcome.html" class="read-more">Read more →</a>
+        </div>
+        <!-- More blog posts will be added here -->
+      </div>
+      <div style="text-align: center; margin-top: 2rem;">
+        <a href="blog/index.html" class="btn btn-secondary">View All Posts</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact">
+    <div class="container">
+      <div class="section-header">
+        <h2>Get in Touch</h2>
+        <p>Let's connect and have a conversation</p>
+      </div>
+      <div class="contact-container">
+        <div class="contact-links">
+          <h3>Find me online</h3>
+          <ul class="social-links">
+            <li><a href="https://github.com/Dreckhoff" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+            <li><a href="https://www.linkedin.com/in/johannes-dreckhoff/" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+            <li><a href="https://www.hackerrank.com/profile/jdreckhoff" target="_blank" rel="noopener noreferrer">HackerRank</a></li>
+          </ul>
+        </div>
+
         <form action="https://formspree.io/f/xwpqyepk" method="POST">
-          <label for="name">Name:</label>
-          <input type="text" id="name" name="name" required />
+          <h3 style="text-align: center; margin-bottom: 1.5rem;">Send me a message</h3>
+          
+          <label for="name">Name</label>
+          <input type="text" id="name" name="name" required>
 
-          <label for="email">Email:</label>
-          <input type="email" id="email" name="_replyto" required />
+          <label for="email">Email</label>
+          <input type="email" id="email" name="_replyto" required>
 
-          <label for="message">Message:</label>
-          <textarea id="message" name="message" rows="5" required></textarea>
+          <label for="message">Message</label>
+          <textarea id="message" name="message" required></textarea>
 
-          <button type="submit">Send Message</button>
+          <button type="submit" class="btn btn-primary" style="width: 100%;">Send Message</button>
         </form>
       </div>
     </div>
   </section>
 
+  <!-- Footer -->
   <footer>
-    <p>© 2025 Johannes Dreckhoff</p>
-    <p><a href="impressum.html">Impressum</a></p>
+    <div class="container">
+      <p>&copy; 2026 Johannes Dreckhoff. All rights reserved.</p>
+      <p><a href="impressum.html">Impressum</a></p>
+    </div>
   </footer>
 
-  <script src="script.js"></script>
+  <script src="js/main.js"></script>
 </body>
 </html>

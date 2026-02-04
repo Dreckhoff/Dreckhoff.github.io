@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Draw Something! – Johannes Dreckhoff</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* Make header more compact for draw page but maintain layout consistency */
+    header {
+      padding: 0.75rem 0 !important;
+      margin-bottom: 1rem !important;
+      position: relative;
+    }
+    header h1 {
+      font-size: 1.5rem !important;
+      margin: 0 0 0.5rem 0 !important;
+    }
+    nav {
+      margin: 0 !important;
+      gap: 1rem !important;
+    }
+    nav a {
+      font-size: 0.9rem !important;
+      padding: 0.375rem 0.75rem !important;
+    }
+    
+    /* Theme toggle button - maintain same styling as main page but smaller */
+    #theme-toggle {
+      position: absolute !important;
+      top: 0.75rem !important;
+      right: 1rem !important;
+      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)) !important;
+      border: none !important;
+      border-radius: 50% !important;
+      width: 2.25rem !important;
+      height: 2.25rem !important;
+      font-size: 0.9rem !important;
+      cursor: pointer !important;
+      transition: var(--transition) !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      color: white !important;
+      box-shadow: var(--shadow-light) !important;
+    }
+    
+    .draw-canvas-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 1rem auto;
+      max-width: 600px;
+    }
+    canvas {
+      border: 2px solid var(--primary-color, #ff6b6b);
+      border-radius: 8px;
+      background: #fff;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+      margin-bottom: 1rem;
+      touch-action: none;
+    }
+    .draw-controls {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .draw-controls label {
+      font-weight: 500;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>AI Drawing Game</h1>
+    <nav>
+      <a href="index.html">← Back to Main Page</a>
+    </nav>
+    <button id="theme-toggle" aria-label="Toggle dark mode">🌙</button>
+  </header>
+  <main>
+    <div style="max-width:600px;margin:2rem auto 1.5rem auto;text-align:center;">
+      <p style="font-size:1.1rem;">
+        <strong>How it works:</strong> Draw anything you like on the canvas below. When you're done, click <b>"Guess my drawing!"</b> and the tiny AI running in the browser will try to guess what you drew—just like the Quick, Draw! game. Right now, the AI is very bad ;(<br><br>
+        You can change the color and brush size, and clear the canvas to start over. Have fun and see if you can stump the AI!
+      </p>
+    </div>
+    <div class="draw-canvas-container">
+      <div class="draw-controls">
+        <label>Color: <input type="color" id="colorPicker" value="#ff6b6b"></label>
+        <label>Size: <input type="range" id="sizePicker" min="2" max="24" value="4"></label>
+        <button id="clearBtn" type="button">Clear</button>
+      </div>
+      <canvas id="drawCanvas" width="500" height="400"></canvas>
+      <button id="guessBtn" type="button" style="margin-bottom:1rem;">Guess my drawing!</button>
+      <div id="guessResult" style="font-size:1.2rem; font-weight:500; color:var(--primary-color,#ff6b6b);"></div>
+    </div>
+  </main>
+  <script>
+    const canvas = document.getElementById('drawCanvas');
+    const ctx = canvas.getContext('2d');
+    let drawing = false;
+    let lastX = 0, lastY = 0;
+    const colorPicker = document.getElementById('colorPicker');
+    const sizePicker = document.getElementById('sizePicker');
+    const clearBtn = document.getElementById('clearBtn');
+
+     // Guess button logic
+     const guessBtn = document.getElementById('guessBtn');
+     const guessResult = document.getElementById('guessResult');
+     guessBtn.addEventListener('click', async () => {
+       guessResult.textContent = 'Thinking...';
+       if (window.guessDrawing) {
+         const result = await window.guessDrawing(canvas);
+         guessResult.textContent = `I think it's: ${result.label}!`;
+       } else {
+         guessResult.textContent = 'AI model not loaded.';
+       }
+     });
+
+    function getPos(e) {
+      if (e.touches) {
+        const rect = canvas.getBoundingClientRect();
+        return [e.touches[0].clientX - rect.left, e.touches[0].clientY - rect.top];
+      } else {
+        return [e.offsetX, e.offsetY];
+      }
+    }
+
+    function startDraw(e) {
+      drawing = true;
+      [lastX, lastY] = getPos(e);
+    }
+    function draw(e) {
+      if (!drawing) return;
+      e.preventDefault();
+      const [x, y] = getPos(e);
+      ctx.strokeStyle = colorPicker.value;
+      ctx.lineWidth = sizePicker.value;
+      ctx.lineCap = 'round';
+      ctx.beginPath();
+      ctx.moveTo(lastX, lastY);
+      ctx.lineTo(x, y);
+      ctx.stroke();
+      [lastX, lastY] = [x, y];
+    }
+    function stopDraw() {
+      drawing = false;
+    }
+    canvas.addEventListener('mousedown', startDraw);
+    canvas.addEventListener('mousemove', draw);
+    canvas.addEventListener('mouseup', stopDraw);
+    canvas.addEventListener('mouseleave', stopDraw);
+    canvas.addEventListener('touchstart', startDraw);
+    canvas.addEventListener('touchmove', draw);
+    canvas.addEventListener('touchend', stopDraw);
+    clearBtn.addEventListener('click', () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+    });
+    </script>
+    <script src="quickdraw_model.js"></script>
+    <script>
+      // Theme toggle functionality (consistent with main page)
+      document.addEventListener('DOMContentLoaded', function() {
+        const toggleButton = document.getElementById('theme-toggle');
+        
+        // Apply saved theme on load
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+          document.body.classList.add(savedTheme);
+          updateToggleButton();
+        } else {
+          // No saved theme → follow system preference
+          if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            document.body.classList.add('dark-mode');
+            updateToggleButton();
+          }
+        }
+
+        // Handle button click
+        toggleButton.addEventListener('click', () => {
+          if (document.body.classList.contains('dark-mode')) {
+            document.body.classList.remove('dark-mode');
+            document.body.classList.add('light-mode');
+            localStorage.setItem('theme', 'light-mode');
+          } else {
+            document.body.classList.remove('light-mode');
+            document.body.classList.add('dark-mode');
+            localStorage.setItem('theme', 'dark-mode');
+          }
+          updateToggleButton();
+        });
+
+        function updateToggleButton() {
+          if (document.body.classList.contains('dark-mode')) {
+            toggleButton.textContent = '☀️';
+            toggleButton.setAttribute('aria-label', 'Switch to light mode');
+          } else {
+            toggleButton.textContent = '🌙';
+            toggleButton.setAttribute('aria-label', 'Switch to dark mode');
+          }
+        }
+      });
+    </script>
+  </script>
+</body>
+</html>
