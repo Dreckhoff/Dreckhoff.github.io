@@ -89,7 +89,6 @@ To deploy:
 ## Contact
 
 Johannes Dreckhoff
-- Email: professorjojo373@gmail.com
 - GitHub: https://github.com/Dreckhoff
 - LinkedIn: https://www.linkedin.com/in/johannes-dreckhoff/
 
