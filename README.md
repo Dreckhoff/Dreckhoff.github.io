@@ -6,7 +6,8 @@ A clean, professional personal website showcasing research, writing, and travels
 
 ```
 /
-├── index.html              # Main landing page with all sections
+├── index.html              # Main landing page with personal bio, gallery, places, blog, contact
+├── professional.html       # Academic background, research resources, paper/software links
 ├── places.html            # Places page with live weather/time
 ├── impressum.html         # Legal page (German requirement)
 ├── css/
@@ -28,7 +29,7 @@ A clean, professional personal website showcasing research, writing, and travels
 ## Features
 
 - **Personal Bio**: About section with personal background
-- **Professional Bio**: Academic journey and research work
+- **Professional Page**: Academic journey, research work, resources, and paper/software links
 - **Gallery**: Photo collection with hover overlays
 - **Places**: Interactive map of cities with live weather and local time
 - **Blog**: Simple blog system with individual post pages
@@ -45,11 +46,7 @@ A clean, professional personal website showcasing research, writing, and travels
 
 ## Adding New Blog Posts
 
-1. Create a new HTML file in `/blog/` directory
-2. Copy the structure from `blog/welcome.html`
-3. Update the content, title, date, and category
-4. Add the post preview to `blog/index.html`
-5. Add the post preview to `index.html` (optional, for homepage)
+See `BLOGGING_GUIDE.txt` for a step-by-step guide. In short: copy an existing post in `blog/`, update its metadata and content, add it to `blog/index.html`, and optionally add a homepage preview.
 
 ## Technologies
 
@@ -91,6 +88,7 @@ To deploy:
 Johannes Dreckhoff
 - GitHub: https://github.com/Dreckhoff
 - LinkedIn: https://www.linkedin.com/in/johannes-dreckhoff/
+- Bluesky: https://bsky.app/profile/johannesdreckhoff.bsky.social
 
 ---
 

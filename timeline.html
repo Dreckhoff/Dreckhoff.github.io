@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="An interactive timeline of sixty years of clathrin and endocytosis research, leading up to a new kinetic Monte Carlo study of curvature generation.">
+  <meta name="author" content="Johannes Dreckhoff">
+  <title>How Cells Pull Things In — A Clathrin Timeline | Johannes Dreckhoff</title>
+  <link rel="stylesheet" href="css/main.css">
+  <style>
+    /* ===== Timeline page ===== */
+    .timeline-hero {
+      background: var(--background-primary);
+      padding: 5rem 0 3rem;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .timeline-hero .section-header {
+      margin-bottom: 2rem;
+    }
+
+    .timeline-intro {
+      max-width: 760px;
+      margin: 0 auto;
+      font-size: 1.125rem;
+      line-height: 1.8;
+      color: var(--text-secondary);
+      text-align: left;
+    }
+
+    .timeline-intro p + p {
+      margin-top: 1rem;
+    }
+
+    .timeline-hint {
+      max-width: 760px;
+      margin: 1.5rem auto 0;
+      text-align: center;
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      font-style: italic;
+    }
+
+    /* ===== The snake timeline ===== */
+    .timeline-section {
+      padding: 4rem 0 5rem;
+    }
+
+    .timeline {
+      position: relative;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      column-gap: 3rem;
+      row-gap: 4rem;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .timeline-item {
+      position: relative;
+      display: flex;
+    }
+
+    /* Snake placement: row 1 L→R, row 2 R→L, row 3 L→R, row 4 full width */
+    .timeline-item:nth-child(1)  { grid-column: 1; grid-row: 1; }
+    .timeline-item:nth-child(2)  { grid-column: 2; grid-row: 1; }
+    .timeline-item:nth-child(3)  { grid-column: 3; grid-row: 1; }
+    .timeline-item:nth-child(4)  { grid-column: 3; grid-row: 2; }
+    .timeline-item:nth-child(5)  { grid-column: 2; grid-row: 2; }
+    .timeline-item:nth-child(6)  { grid-column: 1; grid-row: 2; }
+    .timeline-item:nth-child(7)  { grid-column: 1; grid-row: 3; }
+    .timeline-item:nth-child(8)  { grid-column: 2; grid-row: 3; }
+    .timeline-item:nth-child(9)  { grid-column: 3; grid-row: 3; }
+    .timeline-item:nth-child(10) { grid-column: 1 / -1; grid-row: 4; }
+
+    .timeline-card {
+      position: relative;
+      width: 100%;
+      background: var(--background-primary);
+      border: 1px solid var(--border-color);
+      border-radius: var(--border-radius-lg);
+      padding: 1.25rem 1.5rem;
+      cursor: pointer;
+      transition: var(--transition);
+      text-align: left;
+    }
+
+    .timeline-card:hover,
+    .timeline-card:focus-visible {
+      box-shadow: var(--shadow-lg);
+      transform: translateY(-3px);
+      border-color: var(--primary-color);
+      outline: none;
+    }
+
+    .timeline-card:focus-visible {
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2), var(--shadow-lg);
+    }
+
+    /* Numbered order badge (top-left corner of each card) */
+    .timeline-number {
+      position: absolute;
+      top: -14px;
+      left: -14px;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--primary-color);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.85rem;
+      border: 3px solid var(--background-secondary);
+      z-index: 3;
+      transition: var(--transition);
+    }
+
+    .timeline-card:hover ~ .timeline-number,
+    .timeline-item:hover .timeline-number {
+      transform: scale(1.1);
+      box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.15);
+    }
+
+    /* ===== Snake connector lines (desktop only) ===== */
+    /* Horizontal right-going connectors: items 1, 2, 7, 8 */
+    .timeline-item:nth-child(1)::after,
+    .timeline-item:nth-child(2)::after,
+    .timeline-item:nth-child(7)::after,
+    .timeline-item:nth-child(8)::after {
+      content: '';
+      position: absolute;
+      top: 2.25rem;
+      right: -3rem;
+      width: 3rem;
+      height: 2px;
+      background: var(--primary-color);
+      opacity: 0.35;
+      z-index: 0;
+    }
+
+    /* Horizontal left-going connectors: items 4, 5 (row 2 is reversed) */
+    .timeline-item:nth-child(4)::after,
+    .timeline-item:nth-child(5)::after {
+      content: '';
+      position: absolute;
+      top: 2.25rem;
+      left: -3rem;
+      width: 3rem;
+      height: 2px;
+      background: var(--primary-color);
+      opacity: 0.35;
+      z-index: 0;
+    }
+
+    /* Vertical U-turn connectors at row ends: items 3, 6, 9 */
+    .timeline-item:nth-child(3)::before,
+    .timeline-item:nth-child(6)::before,
+    .timeline-item:nth-child(9)::before {
+      content: '';
+      position: absolute;
+      bottom: -4rem;
+      width: 2px;
+      height: 4rem;
+      background: var(--primary-color);
+      opacity: 0.35;
+      z-index: 0;
+    }
+    .timeline-item:nth-child(3)::before { right: 1.5rem; }
+    .timeline-item:nth-child(6)::before { left: 1.5rem; }
+    .timeline-item:nth-child(9)::before { right: 1.5rem; }
+
+    /* ===== Card content ===== */
+    .timeline-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+
+    .timeline-card-heading {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .timeline-year {
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--primary-color);
+      margin-bottom: 0.25rem;
+    }
+
+    .timeline-title {
+      font-size: 1.125rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      line-height: 1.4;
+      margin: 0;
+    }
+
+    .timeline-chevron {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--background-tertiary);
+      color: var(--primary-color);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+      font-weight: 700;
+      transition: transform 0.25s ease, background 0.2s ease;
+      flex-shrink: 0;
+    }
+
+    .timeline-card[aria-expanded="true"] .timeline-chevron {
+      transform: rotate(45deg);
+      background: var(--primary-color);
+      color: white;
+    }
+
+    .timeline-body {
+      max-height: 0;
+      overflow: hidden;
+      opacity: 0;
+      transition: max-height 0.35s ease, opacity 0.25s ease, margin-top 0.25s ease;
+      color: var(--text-secondary);
+      font-size: 0.98rem;
+      line-height: 1.65;
+    }
+
+    .timeline-card[aria-expanded="true"] .timeline-body {
+      max-height: 800px;
+      opacity: 1;
+      margin-top: 0.9rem;
+    }
+
+    .timeline-body p {
+      margin: 0;
+      color: var(--text-secondary);
+    }
+
+    .timeline-body p + p {
+      margin-top: 0.75rem;
+    }
+
+    /* Thin reference line at the bottom of each card */
+    .timeline-attribution {
+      display: block;
+      margin-top: 1rem;
+      padding-top: 0.6rem;
+      border-top: 1px dashed var(--border-color);
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      font-style: italic;
+      opacity: 0.85;
+      line-height: 1.5;
+    }
+
+    /* ===== Highlighted final node (item 10, full width) ===== */
+    .timeline-item.timeline-final .timeline-card {
+      border: 2px solid transparent;
+      background:
+        linear-gradient(var(--background-primary), var(--background-primary)) padding-box,
+        linear-gradient(135deg, var(--primary-color), var(--secondary-color)) border-box;
+      box-shadow: var(--shadow-md);
+      padding: 1.75rem 2rem;
+    }
+
+    .timeline-item.timeline-final .timeline-number {
+      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+      width: 38px;
+      height: 38px;
+      font-size: 0.95rem;
+      box-shadow: 0 0 0 6px rgba(20, 184, 166, 0.18);
+    }
+
+    .timeline-item.timeline-final .timeline-year {
+      color: var(--secondary-color);
+    }
+
+    .timeline-item.timeline-final .timeline-title {
+      font-size: 1.35rem;
+    }
+
+    .timeline-item.timeline-final .timeline-chevron {
+      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+      color: white;
+    }
+
+    .timeline-cta {
+      margin-top: 1rem;
+      display: inline-block;
+    }
+
+    /* Back to Resources link below the timeline */
+    .timeline-footer-link {
+      text-align: center;
+      margin-top: 3.5rem;
+    }
+
+    /* ===== Tablet (≤1023px): 2-column snake ===== */
+    @media (max-width: 1023px) {
+      .timeline {
+        grid-template-columns: repeat(2, 1fr);
+        column-gap: 2.5rem;
+        row-gap: 3.5rem;
+      }
+
+      /* 2-col snake placement: 5 rows of 2 each */
+      .timeline-item:nth-child(1)  { grid-column: 1; grid-row: 1; }
+      .timeline-item:nth-child(2)  { grid-column: 2; grid-row: 1; }
+      .timeline-item:nth-child(3)  { grid-column: 2; grid-row: 2; }
+      .timeline-item:nth-child(4)  { grid-column: 1; grid-row: 2; }
+      .timeline-item:nth-child(5)  { grid-column: 1; grid-row: 3; }
+      .timeline-item:nth-child(6)  { grid-column: 2; grid-row: 3; }
+      .timeline-item:nth-child(7)  { grid-column: 2; grid-row: 4; }
+      .timeline-item:nth-child(8)  { grid-column: 1; grid-row: 4; }
+      .timeline-item:nth-child(9)  { grid-column: 1; grid-row: 5; }
+      .timeline-item:nth-child(10) { grid-column: 1 / -1; grid-row: 6; }
+
+      /* Reset all desktop connectors */
+      .timeline-item::before,
+      .timeline-item::after {
+        content: none;
+      }
+
+      /* 2-col snake connectors */
+      .timeline-item:nth-child(1)::after,
+      .timeline-item:nth-child(5)::after {
+        content: '';
+        position: absolute;
+        top: 2.25rem;
+        right: -2.5rem;
+        width: 2.5rem;
+        height: 2px;
+        background: var(--primary-color);
+        opacity: 0.35;
+      }
+
+      .timeline-item:nth-child(3)::after,
+      .timeline-item:nth-child(7)::after {
+        content: '';
+        position: absolute;
+        top: 2.25rem;
+        left: -2.5rem;
+        width: 2.5rem;
+        height: 2px;
+        background: var(--primary-color);
+        opacity: 0.35;
+      }
+
+      .timeline-item:nth-child(2)::before,
+      .timeline-item:nth-child(6)::before {
+        content: '';
+        position: absolute;
+        bottom: -3.5rem;
+        right: 1.5rem;
+        width: 2px;
+        height: 3.5rem;
+        background: var(--primary-color);
+        opacity: 0.35;
+      }
+
+      .timeline-item:nth-child(4)::before,
+      .timeline-item:nth-child(8)::before {
+        content: '';
+        position: absolute;
+        bottom: -3.5rem;
+        left: 1.5rem;
+        width: 2px;
+        height: 3.5rem;
+        background: var(--primary-color);
+        opacity: 0.35;
+      }
+    }
+
+    /* ===== Mobile/tablet: single column stack ===== */
+    @media (max-width: 768px) {
+      .timeline {
+        grid-template-columns: 1fr;
+        row-gap: 2rem;
+      }
+
+      .timeline-item:nth-child(n) {
+        grid-column: 1;
+        grid-row: auto;
+      }
+
+      .timeline-item:nth-child(10) {
+        grid-column: 1;
+      }
+
+      .timeline-item::before,
+      .timeline-item::after {
+        content: none !important;
+      }
+
+      .timeline-number {
+        top: -12px;
+        left: 10px;
+      }
+
+      .timeline-hero {
+        padding: 3rem 0 2rem;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .timeline-card,
+      .timeline-chevron,
+      .timeline-body,
+      .timeline-number {
+        transition: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header & Navigation -->
+  <header>
+    <div class="container">
+      <a href="index.html" class="logo">Johannes Dreckhoff</a>
+      <nav>
+        <a href="index.html#about">About</a>
+        <a href="professional.html">Professional</a>
+        <a href="index.html#gallery">Gallery</a>
+        <a href="places.html">Places</a>
+        <a href="blog/index.html">Blog</a>
+        <a href="index.html#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Intro -->
+  <section class="timeline-hero">
+    <div class="container">
+      <div class="section-header">
+        <h2>How Cells Pull Things In</h2>
+        <p>A sixty-year story of clathrin, curvature, and a question only just being answered</p>
+      </div>
+      <div class="timeline-intro">
+        <p>
+          Every one of your cells constantly pulls material in from the outside world. To do it, the cell
+          wraps tiny patches of its own surface into bubbles and swallows them. The machine that builds
+          these bubbles is a protein called <strong>clathrin</strong>, which assembles into a soccer-ball-like
+          cage that bends a flat membrane into a sphere.
+        </p>
+        <p>
+          How a flat sheet decides to curve into a ball &mdash; and why it sometimes fails &mdash; is a puzzle
+          scientists have chased for sixty years. Here's the story.
+        </p>
+      </div>
+      <p class="timeline-hint">Click any milestone to expand it. Read along the snake: left to right, then back again.</p>
+    </div>
+  </section>
+
+  <!-- Timeline -->
+  <!--
+    NOTE TO OWNER: the references at the bottom of each card are field-standard
+    citations (author, journal, year). Please verify and refine the exact
+    journals/volumes you prefer to credit. The Naming-clathrin card kept the
+    original wording you provided.
+  -->
+  <section class="timeline-section">
+    <div class="container">
+      <ol class="timeline" aria-label="Milestones in clathrin and endocytosis research">
+
+        <!-- 1964 -->
+        <li class="timeline-item">
+          <article class="timeline-card" role="button" tabindex="0" aria-expanded="false"
+                   aria-controls="milestone-body-1">
+            <span class="timeline-number" aria-hidden="true">1</span>
+            <div class="timeline-card-header">
+              <div class="timeline-card-heading">
+                <div class="timeline-year">1964</div>
+                <h3 class="timeline-title">The first glimpse</h3>
+              </div>
+              <span class="timeline-chevron" aria-hidden="true">+</span>
+            </div>
+            <div class="timeline-body" id="milestone-body-1">
+              <p>
+                Roth &amp; Porter, peering into mosquito cells with an electron microscope, spot strange
+                "bristle-coated" pits forming at the cell surface and pinching off into the cell.
+                Nobody yet knows what the bristly coat is made of &mdash; but they correctly guess that
+                these pits are how the cell takes things in.
+              </p>
+              <span class="timeline-attribution">
+                Roth, T.F. &amp; Porter, K.R., <em>J. Cell Biol.</em>, 1964.
+              </span>
+            </div>
+          </article>
+        </li>
+
+        <!-- 1969 -->
+        <li class="timeline-item">
+          <article class="timeline-card" role="button" tabindex="0" aria-expanded="false"
+                   aria-controls="milestone-body-2">
+            <span class="timeline-number" aria-hidden="true">2</span>
+            <div class="timeline-card-header">
+              <div class="timeline-card-heading">
+                <div class="timeline-year">1969</div>
+                <h3 class="timeline-title">"A vesicle in a basket"</h3>
+              </div>
+              <span class="timeline-chevron" aria-hidden="true">+</span>
+            </div>
+            <div class="timeline-body" id="milestone-body-2">
+              <p>
+                Kanaseki &amp; Kadota describe the coat's striking geometry: a lattice of hexagons and
+                pentagons, like a tiny geodesic basket cradling each vesicle. The shape itself hints that
+                the coat is what curves the membrane.
+              </p>
+              <span class="timeline-attribution">
+                Kanaseki, T. &amp; Kadota, K., <em>J. Cell Biol.</em>, 1969.
+              </span>
+            </div>
+          </article>
+        </li>
+
+        <!-- 1973 — Helfrich -->
+        <li class="timeline-item">
+          <article class="timeline-card" role="button" tabindex="0" aria-expanded="false"
+                   aria-controls="milestone-body-3">
+            <span class="timeline-number" aria-hidden="true">3</span>
+            <div class="timeline-card-header">
+              <div class="timeline-card-heading">
+                <div class="timeline-year">1973</div>
+                <h3 class="timeline-title">The physics of bending membranes</h3>
+              </div>
+              <span class="timeline-chevron" aria-hidden="true">+</span>
+            </div>
+            <div class="timeline-body" id="milestone-body-3">
+              <p>
+                In parallel, physicist Wolfgang Helfrich writes down the mathematics of how thin
+                membranes resist bending &mdash; treating the cell membrane like an elastic sheet with a
+                stiffness and a preferred shape. This framework becomes the language for everything that
+                follows.
+              </p>
+              <span class="timeline-attribution">
+                Helfrich, W., <em>Z. Naturforsch. C</em>, 1973.
+              </span>
+            </div>
+          </article>
+        </li>
+
+        <!-- 1975–76 — Pearse -->
+        <li class="timeline-item">
+          <article class="timeline-card" role="button" tabindex="0" aria-expanded="false"
+                   aria-controls="milestone-body-4">
+            <span class="timeline-number" aria-hidden="true">4</span>
+            <div class="timeline-card-header">
+              <div class="timeline-card-heading">
+                <div class="timeline-year">1975&ndash;76</div>
+                <h3 class="timeline-title">Naming clathrin</h3>
+              </div>
+              <span class="timeline-chevron" aria-hidden="true">+</span>
+            </div>
+            <div class="timeline-body" id="milestone-body-4">
+              <p>
+                Barbara Pearse purifies these coated vesicles and discovers that a single protein
+                builds the entire cage. She names it <strong>clathrin</strong>, from the Latin for
+                "lattice." The central player finally has a name.
+              </p>
+              <span class="timeline-attribution">
+                Purification: Pearse, B.M.F., <em>J. Mol. Biol.</em>, 1975.
+                Naming &amp; hexagon/pentagon network description: Pearse, B.M.F., <em>PNAS</em>, 1976.
+              </span>
+            </div>
+          </article>
+        </li>
+
+        <!-- 1980 -->
+        <li class="timeline-item">
+          <article class="timeline-card" role="button" tabindex="0" aria-expanded="false"
+                   aria-controls="milestone-body-5">
+            <span class="timeline-number" aria-hidden="true">5</span>
+            <div class="timeline-card-header">
+              <div class="timeline-card-heading">
+                <div class="timeline-year">1980</div>
+                <h3 class="timeline-title">Catching the cage in the act</h3>
+              </div>
+              <span class="timeline-chevron" aria-hidden="true">+</span>
+            </div>
+            <div class="timeline-body" id="milestone-body-5">
+              <p>
+                John Heuser uses rapid-freezing electron microscopy to capture clathrin lattices frozen
+                mid-assembly on the membrane, seeing flat sheets and curved baskets side by side. This
+                raises the question at the heart of the field: how does a flat lattice become a curved
+                one?
+              </p>
+              <span class="timeline-attribution">
+                Heuser, J., <em>J. Cell Biol.</em>, 1980.
+              </span>
+            </div>
+          </article>
+        </li>
+
+        <!-- ~1990s -->
+        <li class="timeline-item">
+          <article class="timeline-card" role="button" tabindex="0" aria-expanded="false"
+                   aria-controls="milestone-body-6">
+            <span class="timeline-number" aria-hidden="true">6</span>
+            <div class="timeline-card-header">
+              <div class="timeline-card-heading">
+                <div class="timeline-year">~1990s</div>
+                <h3 class="timeline-title">Mapping the machine</h3>
+              </div>
+              <span class="timeline-chevron" aria-hidden="true">+</span>
+            </div>
+            <div class="timeline-body" id="milestone-body-6">
+              <p>
+                Through the work of Tom Kirchhausen and many others, the molecular cast assembles:
+                the <em>triskelion</em> (clathrin's three-legged building block), the adaptor proteins
+                that recruit it, and the picture of clathrin as a self-assembling, programmable cage.
+                The parts list is now known &mdash; but the mechanism of bending is still debated.
+              </p>
+              <span class="timeline-attribution">
+                e.g. Ungewickell &amp; Branton, <em>Nature</em>, 1981;
+                Kirchhausen, T., <em>Annu. Rev. Cell Dev. Biol.</em>, 1999.
+              </span>
+            </div>
+          </article>
+        </li>
+
+        <!-- 2018 -->
+        <li class="timeline-item">
+          <article class="timeline-card" role="button" tabindex="0" aria-expanded="false"
+                   aria-controls="milestone-body-7">
+            <span class="timeline-number" aria-hidden="true">7</span>
+            <div class="timeline-card-header">
+              <div class="timeline-card-heading">
+                <div class="timeline-year">2018</div>
+                <h3 class="timeline-title">Flat or curved from the start?</h3>
+              </div>
+              <span class="timeline-chevron" aria-hidden="true">+</span>
+            </div>
+            <div class="timeline-body" id="milestone-body-7">
+              <p>
+                A long-running controversy: does clathrin first lay down a flat sheet and then bend
+                it, or does it curve as it grows? Bucher et al. and others show that the balance of
+                clathrin and adaptors tips the outcome, reframing the flat-to-curved transition as
+                something tunable rather than fixed.
+              </p>
+              <span class="timeline-attribution">
+                Bucher, D. et al., <em>Nat. Commun.</em>, 2018.
+              </span>
+            </div>
+          </article>
+        </li>
+
+        <!-- 2021 -->
+        <li class="timeline-item">
+          <article class="timeline-card" role="button" tabindex="0" aria-expanded="false"
+                   aria-controls="milestone-body-8">
+            <span class="timeline-number" aria-hidden="true">8</span>
+            <div class="timeline-card-header">
+              <div class="timeline-card-heading">
+                <div class="timeline-year">2021</div>
+                <h3 class="timeline-title">The coat is under tension</h3>
+              </div>
+              <span class="timeline-chevron" aria-hidden="true">+</span>
+            </div>
+            <div class="timeline-body" id="milestone-body-8">
+              <p>
+                Two key experiments. Sochacki et al. map the spontaneous curvature built into flat
+                lattices, and Tagiltsev et al. perform a remarkable trick: they cut a clathrin lattice
+                and watch it spring to a tighter curl &mdash; proving the coat is an elastically loaded
+                spring, storing mechanical energy. The coat doesn't just sit there; it pushes.
+              </p>
+              <span class="timeline-attribution">
+                Sochacki, K.A. et al., <em>Dev. Cell</em>, 2021;
+                Tagiltsev, G. et al., <em>eLife</em>, 2021.
+              </span>
+            </div>
+          </article>
+        </li>
+
+        <!-- 2023 -->
+        <li class="timeline-item">
+          <article class="timeline-card" role="button" tabindex="0" aria-expanded="false"
+                   aria-controls="milestone-body-9">
+            <span class="timeline-number" aria-hidden="true">9</span>
+            <div class="timeline-card-header">
+              <div class="timeline-card-heading">
+                <div class="timeline-year">2023</div>
+                <h3 class="timeline-title">Watching curvature happen, live</h3>
+              </div>
+              <span class="timeline-chevron" aria-hidden="true">+</span>
+            </div>
+            <div class="timeline-body" id="milestone-body-9">
+              <p>
+                Mund et al. use super-resolution microscopy to follow individual coats bending in
+                real cells, supporting a "cooperative" picture where assembly and curvature progress
+                together. The flat-to-curved question is now answerable with data &mdash; but a unifying
+                physical explanation is still missing.
+              </p>
+              <span class="timeline-attribution">
+                Mund, M. et al., <em>Nat. Cell Biol.</em>, 2023.
+              </span>
+            </div>
+          </article>
+        </li>
+
+        <!-- Final: This work -->
+        <li class="timeline-item timeline-final">
+          <article class="timeline-card" role="button" tabindex="0" aria-expanded="true"
+                   aria-controls="milestone-body-10">
+            <span class="timeline-number" aria-hidden="true">10</span>
+            <div class="timeline-card-header">
+              <div class="timeline-card-heading">
+                <div class="timeline-year">This work</div>
+                <h3 class="timeline-title">One model, three fates</h3>
+              </div>
+              <span class="timeline-chevron" aria-hidden="true">+</span>
+            </div>
+            <div class="timeline-body" id="milestone-body-10">
+              <p>
+                This paper builds a computer simulation of a growing clathrin coat from the bottom up
+                and finds something surprising: <strong>curvature doesn't need a special trigger.</strong>
+                As the cage grows, its own geometry makes it progressively stiffer, and this stiffening
+                alone can drive a flat sheet to curl into a sphere.
+              </p>
+              <p>
+                The very same rules spontaneously produce all three outcomes seen in cells &mdash; flat
+                plaques, stalled "aborted" pits, and fully sealed vesicles &mdash; depending only on how
+                the coat grows. It even reproduces the spring-back seen in the 2021 cutting experiments.
+                A sixty-year-old question, answered by geometry.
+              </p>
+              <a href="research/cme/index.html" class="btn btn-primary timeline-cta">Read the paper &rarr;</a>
+              <span class="timeline-attribution">
+                Dreckhoff, J.H.H., Schwarz, U.S. &amp; Lettermann, L., arXiv:2606.30267, 2026.
+              </span>
+            </div>
+          </article>
+        </li>
+
+      </ol>
+
+      <div class="timeline-footer-link">
+        <a href="research/cme/index.html" class="btn btn-secondary">&larr; Back to CME preprint</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p>&copy; 2026 Johannes Dreckhoff. All rights reserved.</p>
+      <p><a href="impressum.html">Impressum</a></p>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      const cards = document.querySelectorAll('.timeline-card');
+
+      function toggle(card) {
+        const open = card.getAttribute('aria-expanded') === 'true';
+        card.setAttribute('aria-expanded', String(!open));
+      }
+
+      cards.forEach(function (card) {
+        card.addEventListener('click', function (e) {
+          if (e.target.closest('a, button')) return;
+          toggle(card);
+        });
+        card.addEventListener('keydown', function (e) {
+          if (e.key === 'Enter' || e.key === ' ') {
+            if (e.target.closest('a, button')) return;
+            e.preventDefault();
+            toggle(card);
+          }
+        });
+      });
+    })();
+  </script>
+</body>
+</html>

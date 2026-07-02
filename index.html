@@ -15,7 +15,7 @@
       <a href="#" class="logo">Johannes Dreckhoff</a>
       <nav>
         <a href="#about">About</a>
-        <a href="#professional">Professional</a>
+        <a href="professional.html">Professional</a>
         <a href="#gallery">Gallery</a>
         <a href="places.html">Places</a>
         <a href="blog/index.html">Blog</a>
@@ -33,7 +33,8 @@
         life sciences.</p>
       <div class="cta-buttons">
         <a href="#about" class="btn btn-primary">Learn More</a>
-        <a href="assets/documents/CV Johannes Dreckhoff.pdf" class="btn btn-secondary" target="_blank">Download CV</a>
+        <a href="#gallery" class="btn btn-secondary">View Gallery</a>
+        <a href="professional.html" class="btn btn-secondary">Professional</a>
       </div>
     </div>
   </section>
@@ -41,11 +42,17 @@
   <!-- Personal Bio Section -->
   <section id="about">
     <div class="container">
-      <div class="section-header">
-        <h2>About Me</h2>
-        <p>Get to know my personal side</p>
+      <div class="about-heading-row">
+        <div class="about-heading-spacer" aria-hidden="true"></div>
+        <div class="section-header about-heading">
+          <h2>About Me</h2>
+          <p>Get to know my personal side</p>
+        </div>
+        <div class="about-photo" aria-label="Profile photo">
+          <img src="assets/gallery/sending_love.jpeg" alt="Johannes in Elsass" loading="lazy">
+        </div>
       </div>
-      <div class="bio-content">
+      <div class="bio-content about-copy">
         <p>
           Welcome to my website! I'm Johannes, a physics student at the University of Heidelberg, Germany. 
           I was born on January 18th, 2001 in Düsseldorf, and after completing my Abitur in 2019, I moved to 
@@ -65,123 +72,14 @@
           the Wheel of Time series. However, the new "A Knight of the Seven Kingdoms" show is also quite nice!
         </p>
         <p>
-          This website is my corner of the internet where I share my academic work, research interests, personal 
+          This website is my corner of the internet where I share my academic work, research interests, personal
           adventures, and thoughts on topics I find fascinating. Feel free to explore and don't hesitate to reach out!
         </p>
       </div>
     </div>
   </section>
 
-  <!-- Professional Bio Section -->
-  <section id="professional">
-    <div class="container">
-      <div class="section-header">
-        <h2>Professional Background</h2>
-        <p>My academic journey and research work</p>
-      </div>
-      <div class="bio-content">
-        <h3>Education</h3>
-        <p>
-          I completed my <a href="assets/documents/bachelor-thesis.pdf" target="_blank">bachelor's degree</a> in physics in 2023, writing my thesis under the supervision of 
-          Prof. Dr. Andreas Mielke on pattern formation in lipid membranes. The research tackled a fascinating 
-          question: "Why is everything we see in nature so sharp?" Think of zebra stripes - why aren't they a 
-          blurry mess?
-        </p>
-        <p>
-          In my thesis, I explored how patterns emerge in cell membranes through nonlinear feedback suppression, 
-          similar to how a single chant can take over an entire stadium. It's a mechanism where competing patterns 
-          actively suppress each other until one dominant pattern emerges.
-        </p>
-        <p>
-          From November 2024 until December 2025 I worked on my <a href="assets/documents/Master Thesis Johannes Dreckhoff.pdf" target="_blank">master thesis</a> in the group of Prof. Dr. Ulrich Schwarz shared between the Institute for 
-          Theoretical Physics and the BioQuant in Heidelberg. The thesis focused on how cells wrap around things they want to "eat". It does so by creating a 
-          layer of proteins (called clathrin) on its surface which assists in the bending. For this project, 
-          I developed simulation software using JAX (typically used for machine learning) combined with Python's object-oriented programming. 
-          This approach allowed me to create fast, efficient simulations while maintaining clean, manageable code. It was an exciting blend of 
-          computational physics, biophysics, and software engineering.
-        </p>
-
-        <p>
-          We were able to show that the protein coat becomes "stronger" while it grows which helps it to bend the membrane. The protein coat has usually
-          a very symmetric structure (hexagonal). We could also show that the coat can bend the membrane a bit and then "lock" this curvature in by 
-          creating a "defect" (a pentagon) in its structure. This is a bit like how you can create a cone by cutting out a slice of paper and then gluing the 
-          edges together. The cut creates a "defect" in the otherwise flat sheet, allowing it to 
-          bend into a cone shape. 
-        </p>
-
-        <h3>Current Research</h3>
-        <p>
-          I'm currently employed in the Schwarz group to further refine the findings of my master thesis. In an ideal world we would like to publish the results 
-          before I start my PhD. But let's see how that goes!
-        </p>
-
-        <h3>Resources</h3>
-        <div class="grid grid-3" style="margin-top: 2rem; gap: 2rem;">
-          <div class="card">
-            <h4>Bachelor Thesis</h4>
-            <p style="color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 1rem;">
-              Pattern Formation in Lipid Membranes (2023)
-            </p>
-            <div style="display: flex; flex-direction: column; gap: 0.75rem;">
-              <a href="assets/documents/bachelor-thesis.pdf" target="_blank" class="btn btn-primary">Download PDF</a>
-              <details style="margin-top: 0.5rem;">
-                <summary style="cursor: pointer; color: var(--primary-color); font-weight: 600;">Audio Summaries (NotebookLM)</summary>
-                <div style="margin-top: 1rem;">
-                  <p style="font-size: 0.9rem; margin-bottom: 0.5rem;">German:</p>
-                  <audio controls style="width: 100%; margin-bottom: 1rem;">
-                    <source src="assets/documents/ger-audio-summary.mp3" type="audio/mpeg">
-                    Your browser does not support the audio element.
-                  </audio>
-                  <p style="font-size: 0.9rem; margin-bottom: 0.5rem;">English:</p>
-                  <audio controls style="width: 100%;">
-                    <source src="assets/documents/eng-audio-summary.mp3" type="audio/mpeg">
-                    Your browser does not support the audio element.
-                  </audio>
-                </div>
-              </details>
-              <details style="margin-top: 0.5rem;">
-                <summary style="cursor: pointer; color: var(--primary-color); font-weight: 600;">Summary Poster (NotebookLM)</summary>
-                <div style="margin-top: 1rem;">
-                  <a href="assets/documents/bachelor_thesis_summary_poster.png" target="_blank" style="display: block; margin-bottom: 0.75rem;">
-                    <img src="assets/documents/bachelor_thesis_summary_poster.png" alt="Bachelor Thesis Summary Poster" style="width: 100%; border-radius: var(--border-radius); border: 1px solid var(--border-color); cursor: pointer; transition: var(--transition);" onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='1'">
-                  </a>
-                  <a href="assets/documents/bachelor_thesis_summary_poster.png" download="Bachelor_Thesis_Summary_Poster.png" class="btn btn-secondary" style="width: 100%; text-align: center;">Download Poster</a>
-                </div>
-              </details>
-            </div>
-          </div>
-
-          <div class="card">
-            <h4>Master Thesis</h4>
-            <p style="color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 1rem;">
-              Curvature Generation in Clathrin-Mediated Endocytosis (2024-2025)
-            </p>
-            <div style="display: flex; flex-direction: column; gap: 0.75rem;">
-              <a href="assets/documents/Master Thesis Johannes Dreckhoff.pdf" target="_blank" class="btn btn-primary">Download PDF</a>
-              <details style="margin-top: 0.5rem;">
-                <summary style="cursor: pointer; color: var(--primary-color); font-weight: 600;">Summary Poster (NotebookLM)</summary>
-                <div style="margin-top: 1rem;">
-                  <a href="assets/documents/master_thesis_summary_poster.png" target="_blank" style="display: block; margin-bottom: 0.75rem;">
-                    <img src="assets/documents/master_thesis_summary_poster.png" alt="Master Thesis Summary Poster" style="width: 100%; border-radius: var(--border-radius); border: 1px solid var(--border-color); cursor: pointer; transition: var(--transition);" onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='1'">
-                  </a>
-                  <a href="assets/documents/master_thesis_summary_poster.png" download="Master_Thesis_Summary_Poster.png" class="btn btn-secondary" style="width: 100%; text-align: center;">Download Poster</a>
-                </div>
-              </details>
-            </div>
-          </div>
-
-          <div class="card">
-            <h4>Curriculum Vitae</h4>
-            <p style="color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 1rem;">
-              Complete academic and professional background
-            </p>
-            <a href="assets/documents/CV Johannes Dreckhoff.pdf" target="_blank" class="btn btn-primary">Download CV</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
+  <!-- Professional background moved to professional.html -->
   <!-- Gallery Section -->
   <section id="gallery">
     <div class="container">
@@ -278,6 +176,7 @@
           <ul class="social-links">
             <li><a href="https://github.com/Dreckhoff" target="_blank" rel="noopener noreferrer">GitHub</a></li>
             <li><a href="https://www.linkedin.com/in/johannes-dreckhoff/" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+            <li><a href="https://bsky.app/profile/johannesdreckhoff.bsky.social" target="_blank" rel="noopener noreferrer">Bluesky</a></li>
             <li><a href="https://www.hackerrank.com/profile/jdreckhoff" target="_blank" rel="noopener noreferrer">HackerRank</a></li>
           </ul>
         </div>

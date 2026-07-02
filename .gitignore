@@ -1,0 +1,13 @@
+.DS_Store
+Thumbs.db
+
+# Local editor and OS metadata
+.idea/
+.vscode/
+
+# Local logs and temporary files
+*.log
+*.tmp
+
+# High-resolution manuscript source figures stay local; optimized web assets can be published.
+assets/research/cme/Figures/

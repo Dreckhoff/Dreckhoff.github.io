@@ -93,7 +93,7 @@ a:hover {
 }
 
 /* ===== Header & Navigation ===== */
-header {
+body > header {
   position: sticky;
   top: 0;
   background: var(--background-primary);
@@ -102,7 +102,7 @@ header {
   box-shadow: var(--shadow-sm);
 }
 
-header .container {
+body > header .container {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -168,6 +168,7 @@ nav a:hover {
 
 .hero .cta-buttons {
   display: flex;
+  flex-wrap: wrap;
   gap: 1rem;
   justify-content: center;
   margin-top: 2rem;
@@ -285,6 +286,53 @@ section {
   font-size: 1.125rem;
   line-height: 1.8;
   margin-bottom: 1.5rem;
+}
+
+.about-heading-row {
+  display: grid;
+  grid-template-columns: minmax(150px, 1fr) minmax(280px, 520px) minmax(150px, 1fr);
+  gap: 2rem;
+  align-items: center;
+  max-width: 980px;
+  margin: 0 auto 3rem;
+}
+
+.about-heading-row .section-header {
+  margin-bottom: 0;
+}
+
+.about-heading {
+  justify-self: center;
+  text-align: center;
+}
+
+.about-heading-spacer {
+  min-height: 1px;
+}
+
+.about-copy {
+  text-align: center;
+}
+
+.about-copy p {
+  text-align: center;
+}
+
+.about-photo {
+  width: 170px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 6px solid var(--background-primary);
+  box-shadow: var(--shadow-lg);
+  justify-self: center;
+}
+
+.about-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
 }
 
 /* ===== Gallery ===== */
@@ -517,7 +565,11 @@ footer a:hover {
     padding: 0 1rem;
   }
 
-  header .container {
+  body > header {
+    position: static;
+  }
+
+  body > header .container {
     flex-direction: column;
     gap: 1rem;
   }
@@ -548,6 +600,20 @@ footer a:hover {
   .hero .cta-buttons {
     flex-direction: column;
     align-items: center;
+  }
+
+  .about-heading-row {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .about-heading-spacer {
+    display: none;
+  }
+
+  .about-photo {
+    width: min(210px, 65vw);
   }
 
   section {

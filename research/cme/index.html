@@ -1,0 +1,1041 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Visual guide to the arXiv preprint on pathway variability, coat stiffening, and mechanical adaptation during clathrin-mediated endocytosis.">
+  <title>Pathway Variability in Clathrin-Mediated Endocytosis | Johannes Dreckhoff</title>
+  <link rel="stylesheet" href="../../css/main.css">
+  <style>
+    .paper-hero {
+      background: var(--background-primary);
+      border-bottom: 1px solid var(--border-color);
+      padding: 5rem 0 4rem;
+    }
+
+    .paper-hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(280px, 0.95fr);
+      gap: 3rem;
+      align-items: center;
+    }
+
+    .paper-kicker {
+      color: var(--primary-color);
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      margin-bottom: 1rem;
+      text-transform: uppercase;
+    }
+
+    .paper-hero h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+
+    .paper-hero p {
+      font-size: 1.125rem;
+    }
+
+    .paper-meta {
+      color: var(--text-secondary);
+      font-size: 0.98rem;
+      line-height: 1.7;
+      margin-top: 1rem;
+    }
+
+    .paper-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-top: 1.5rem;
+    }
+
+    .paper-figure,
+    .video-card {
+      background: var(--background-primary);
+      border: 1px solid var(--border-color);
+      border-radius: var(--border-radius);
+      overflow: hidden;
+    }
+
+    .paper-figure img {
+      display: block;
+      width: 100%;
+    }
+
+    .paper-figure figcaption,
+    .video-card figcaption {
+      border-top: 1px solid var(--border-color);
+      color: var(--text-secondary);
+      font-size: 0.92rem;
+      line-height: 1.55;
+      padding: 0.9rem 1rem;
+    }
+
+    .paper-figure-hero {
+      box-shadow: var(--shadow-lg);
+    }
+
+    .paper-figure-wide {
+      margin-top: 2rem;
+    }
+
+    .panel-grid {
+      display: grid;
+      gap: 1rem;
+      grid-template-columns: repeat(3, 1fr);
+      margin-top: 2rem;
+    }
+
+    .panel-card {
+      background: var(--background-primary);
+      border: 1px solid var(--border-color);
+      border-radius: var(--border-radius);
+      overflow: hidden;
+    }
+
+    .panel-card img {
+      display: block;
+      width: 100%;
+    }
+
+    .panel-card figcaption {
+      border-top: 1px solid var(--border-color);
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      line-height: 1.5;
+      padding: 0.85rem 1rem;
+    }
+
+    .panel-card-feature {
+      box-shadow: var(--shadow-md);
+    }
+
+    .panel-pair {
+      display: grid;
+      gap: 1rem;
+      grid-template-columns: 1fr;
+    }
+
+    .video-card video {
+      background: var(--background-tertiary);
+      display: block;
+      width: 100%;
+    }
+
+    .paper-nav {
+      background: var(--background-primary);
+      border-bottom: 1px solid var(--border-color);
+      position: sticky;
+      top: 73px;
+      z-index: 80;
+    }
+
+    .paper-nav .container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      justify-content: center;
+      padding-bottom: 0.75rem;
+      padding-top: 0.75rem;
+    }
+
+    .paper-nav a {
+      border-radius: 999px;
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      font-weight: 600;
+      padding: 0.45rem 0.85rem;
+    }
+
+    .paper-nav a:hover {
+      background: var(--background-secondary);
+      color: var(--primary-color);
+      text-decoration: none;
+    }
+
+    .story-grid {
+      display: grid;
+      gap: 1.5rem;
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .model-overview {
+      align-items: start;
+      display: grid;
+      gap: 1.5rem;
+      grid-template-columns: minmax(0, 1fr) minmax(320px, 0.85fr);
+      margin-top: 1.5rem;
+    }
+
+    .model-overview .story-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .model-overview .panel-card {
+      align-self: stretch;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .model-overview .panel-card img {
+      flex: 1;
+      object-fit: contain;
+    }
+
+    .story-card {
+      background: var(--background-primary);
+      border: 1px solid var(--border-color);
+      border-radius: var(--border-radius);
+      padding: 1.5rem;
+    }
+
+    .story-card strong {
+      color: var(--primary-color);
+      display: block;
+      font-size: 0.9rem;
+      letter-spacing: 0.06em;
+      margin-bottom: 0.5rem;
+      text-transform: uppercase;
+    }
+
+    .context-timeline {
+      column-gap: 4rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      margin-top: 2rem;
+      position: relative;
+      row-gap: 1.25rem;
+    }
+
+    .context-timeline::before {
+      background: linear-gradient(180deg, transparent, var(--border-color) 5%, var(--border-color) 95%, transparent);
+      bottom: 0.75rem;
+      content: "";
+      left: 50%;
+      position: absolute;
+      top: 0.75rem;
+      transform: translateX(-50%);
+      width: 2px;
+    }
+
+    .timeline-note {
+      background: var(--background-primary);
+      border: 1px solid var(--border-color);
+      border-radius: var(--border-radius);
+      display: flex;
+      flex-direction: column;
+      min-height: 100%;
+      padding: 1.25rem;
+      position: relative;
+    }
+
+    .timeline-note:nth-child(odd) {
+      grid-column: 1;
+    }
+
+    .timeline-note:nth-child(even) {
+      grid-column: 2;
+    }
+
+    .timeline-note:nth-child(1) {
+      grid-row: 1;
+    }
+
+    .timeline-note:nth-child(2) {
+      grid-row: 2;
+    }
+
+    .timeline-note:nth-child(3) {
+      grid-row: 3;
+    }
+
+    .timeline-note:nth-child(4) {
+      grid-row: 4;
+    }
+
+    .timeline-note:nth-child(5) {
+      grid-row: 5;
+    }
+
+    .timeline-note:nth-child(6) {
+      grid-row: 6;
+    }
+
+    .timeline-note::before {
+      background: var(--background-primary);
+      border: 2px solid var(--primary-color);
+      border-radius: 50%;
+      content: "";
+      height: 0.8rem;
+      position: absolute;
+      top: 1.6rem;
+      width: 0.8rem;
+      z-index: 1;
+    }
+
+    .timeline-note:nth-child(odd)::before {
+      right: -2.47rem;
+    }
+
+    .timeline-note:nth-child(even)::before {
+      left: -2.47rem;
+    }
+
+    .timeline-note::after {
+      background: var(--border-color);
+      content: "";
+      height: 1px;
+      position: absolute;
+      top: 2rem;
+      width: 2rem;
+    }
+
+    .timeline-note:nth-child(odd)::after {
+      right: -2rem;
+    }
+
+    .timeline-note:nth-child(even)::after {
+      left: -2rem;
+    }
+
+    .timeline-year {
+      color: var(--primary-color);
+      font-weight: 700;
+      margin-bottom: 0.35rem;
+    }
+
+    .timeline-source {
+      border-top: 1px solid var(--border-color);
+      color: var(--text-light);
+      display: block;
+      font-size: 0.78rem;
+      line-height: 1.45;
+      margin-top: auto;
+      padding-top: 0.85rem;
+    }
+
+    .timeline-note.is-current {
+      border-color: var(--primary-color);
+      box-shadow: var(--shadow-md);
+    }
+
+    .figure-story {
+      display: grid;
+      gap: 2rem;
+      grid-template-columns: minmax(0, 1fr) minmax(280px, 1fr);
+      margin-top: 2rem;
+    }
+
+    .figure-story.model-comparison {
+      grid-template-columns: 1fr;
+    }
+
+    .model-comparison .panel-pair {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .model-comparison .panel-card img {
+      background: var(--background-primary);
+      height: 360px;
+      object-fit: contain;
+    }
+
+    .fixed-curvature-story {
+      grid-template-columns: 1fr;
+    }
+
+    .fixed-curvature-media {
+      display: grid;
+      gap: 1rem;
+      grid-template-columns: minmax(280px, 0.9fr) minmax(280px, 1fr);
+    }
+
+    .fixed-curvature-media .paper-figure img {
+      margin: 0 auto;
+      max-width: 376px;
+    }
+
+    .fate-grid,
+    .video-grid {
+      display: grid;
+      gap: 1rem;
+      grid-template-columns: repeat(3, 1fr);
+      margin-top: 1.5rem;
+    }
+
+    .fate-card {
+      background: var(--background-primary);
+      border: 1px solid var(--border-color);
+      border-radius: var(--border-radius);
+      padding: 1.25rem;
+    }
+
+    .fate-card h3 {
+      margin-bottom: 0.5rem;
+    }
+
+    .fate-card-flat {
+      background: rgba(22, 163, 74, 0.08);
+      border-color: rgba(22, 163, 74, 0.45);
+    }
+
+    .fate-card-flat h3 {
+      color: #15803d;
+    }
+
+    .fate-card-aborted {
+      background: rgba(190, 24, 93, 0.08);
+      border-color: rgba(190, 24, 93, 0.45);
+    }
+
+    .fate-card-aborted h3 {
+      color: #be185d;
+    }
+
+    .fate-card-closed {
+      background: rgba(37, 99, 235, 0.08);
+      border-color: rgba(37, 99, 235, 0.45);
+    }
+
+    .fate-card-closed h3 {
+      color: var(--primary-color);
+    }
+
+    .figure-story .fate-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .fate-panel-grid {
+      display: grid;
+      gap: 1rem;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      margin-top: 2rem;
+    }
+
+    .fate-panel-grid .panel-card img {
+      background: var(--background-primary);
+      margin: 0 auto;
+      max-width: 260px;
+      object-fit: contain;
+    }
+
+    .fate-colormap-card {
+      align-self: end;
+      grid-column: 3;
+      justify-self: end;
+      max-width: 220px;
+    }
+
+    .mechanism-panel {
+      margin-top: 2rem;
+    }
+
+    .mechanism-panel .paper-figure img {
+      background: var(--background-primary);
+      object-fit: contain;
+    }
+
+    .mechanism-panel-narrow {
+      align-items: center;
+      grid-template-columns: minmax(240px, 0.85fr) minmax(0, 1fr);
+    }
+
+    .image-video-grid {
+      display: grid;
+      gap: 1rem;
+      grid-template-columns: minmax(0, 1.1fr) minmax(280px, 0.9fr);
+      margin-top: 2rem;
+    }
+
+    #media .video-grid {
+      grid-template-columns: minmax(280px, 420px);
+      justify-content: center;
+    }
+
+    .insight-list {
+      color: var(--text-secondary);
+      line-height: 1.7;
+      margin: 1rem 0 0;
+      padding-left: 1.25rem;
+    }
+
+    .insight-list li + li {
+      margin-top: 0.5rem;
+    }
+
+    .paper-cta {
+      background: var(--background-primary);
+      border-top: 1px solid var(--border-color);
+      text-align: center;
+    }
+
+    .paper-link-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      justify-content: center;
+      margin-top: 1.5rem;
+    }
+
+    @media (max-width: 900px) {
+      .paper-hero-grid,
+      .figure-story,
+      .story-grid,
+      .model-overview,
+      .panel-grid,
+      .context-timeline,
+      .fixed-curvature-media,
+      .fate-panel-grid,
+      .mechanism-panel-narrow,
+      .image-video-grid,
+      .fate-grid,
+      .video-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .paper-nav {
+        position: static;
+      }
+
+      .paper-hero h1 {
+        font-size: 2.3rem;
+      }
+
+      .context-timeline {
+        padding-left: 1.5rem;
+      }
+
+      .context-timeline::before {
+        left: 0.35rem;
+      }
+
+      .timeline-note:nth-child(n) {
+        grid-column: 1;
+      }
+
+      .timeline-note:nth-child(n)::before {
+        left: -1.55rem;
+        right: auto;
+      }
+
+      .timeline-note:nth-child(n)::after {
+        left: -1.2rem;
+        right: auto;
+        width: 1.2rem;
+      }
+
+      .fate-colormap-card {
+        grid-column: auto;
+        justify-self: stretch;
+        max-width: none;
+      }
+    }
+
+    @media (max-width: 700px) {
+      .model-comparison .panel-pair {
+        grid-template-columns: 1fr;
+      }
+
+      .model-comparison .panel-card img {
+        height: 320px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <a href="../../index.html" class="logo">Johannes Dreckhoff</a>
+      <nav>
+        <a href="../../index.html#about">About</a>
+        <a href="../../professional.html">Professional</a>
+        <a href="../../index.html#gallery">Gallery</a>
+        <a href="../../places.html">Places</a>
+        <a href="../../blog/index.html">Blog</a>
+        <a href="../../index.html#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="paper-hero">
+    <div class="container paper-hero-grid">
+      <div>
+        <p class="paper-kicker">arXiv preprint</p>
+        <h1>Pathway variability, coat stiffening and mechanical adaptation during clathrin-mediated endocytosis</h1>
+        <!-- <h3>or: Diverse curvatures from self-generated stiffness and curvature memory in clathrin mediated endocytosis</h3> -->
+        <p>
+          <!-- A visual guide to our preprint on how the diversity of morphologies of clathrin coats observed in nature can be understood 
+          through a single microscopic model, combining discrete stochastic assembly with continuum mechanics, explaining 
+          flat plaques, stalled pits, and closed vesicles. -->
+          A visual guide to our preprint on how a single microscopic model — combining discrete stochastic assembly with continuum 
+          mechanics — explains the diversity of clathrin coat morphologies observed in 
+          nature: flat plaques, stalled pits, and closed vesicles.
+        </p>
+        <div class="paper-meta">
+          Johannes H. H. Dreckhoff, Ulrich S. Schwarz, and Leon Lettermann.
+          Submitted to arXiv on June 29, 2026.
+        </div>
+        <div class="paper-actions">
+          <a href="https://arxiv.org/abs/2606.30267" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Read on arXiv</a>
+          <a href="https://arxiv.org/pdf/2606.30267" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">Download PDF</a>
+        </div>
+      </div>
+      <figure class="paper-figure paper-figure-hero">
+        <img src="../../assets/research/cme/figures-web/panels/fig1-panel-f.png" alt="Three distinct fates of clathrin assembly are controlled by two fate gates.">
+        <figcaption>
+          Three fates of CME — flat plaques, aborted pits, and closed vesicles — emerge from the same microscopic rules. Two fate gates control which
+          path is taken during assembly.
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <div class="paper-nav" aria-label="Paper page navigation">
+    <div class="container">
+      <a href="#background">Background</a>
+      <a href="#model">Model</a>
+      <a href="#stiffening">Stiffening</a>
+      <a href="#fates">Fates</a>
+      <a href="#mechanism">Two Gates</a>
+      <a href="#stiffness-memory">Stiffness</a>
+      <a href="#cutting">Cutting</a>
+      <a href="#media">Media</a>
+      <a href="#links">Links</a>
+    </div>
+  </div>
+
+  <section id="background">
+    <div class="container">
+      <div class="section-header">
+        <h2>What is clathrin even about?</h2>
+        <p>
+          Clathrin is a protein cells use to transport cargo (nutrients, other proteins, etc.) across the
+          cellular membrane. It assembles into a highly regular hexagonal lattice that sometimes bends the membrane
+          into a vesicle, enclosing the cargo.
+          Clathrin coats are small, dynamic, and mechanically active. Experiments see flat lattices, stalled 
+          pits, and closed cages, but the path from local protein assembly to
+          global membrane shape is still not fully understood. The structures are generally too small
+          for live-cell imaging, and simulations are complicated as the system combines stochastic assembly, discrete
+          geometry, and continuum mechanics.
+        </p>
+      </div>
+
+      <h3>Historical context</h3>
+      <div class="context-timeline">
+        <div class="timeline-note">
+          <div class="timeline-year">1964</div>
+          <h3>The first glimpse</h3>
+          <p>Bristle-coated pits are observed at the cell surface, revealing a specialized uptake structure.</p>
+          <span class="timeline-source">Roth &amp; Porter, J. Cell Biol., 1964.</span>
+        </div>
+        <div class="timeline-note">
+          <div class="timeline-year">1975-76</div>
+          <h3>Clathrin gets a name</h3>
+          <p>The coat protein is purified and named after its lattice-like architecture — clathrin.</p>
+          <span class="timeline-source">Pearse, J. Mol. Biol., 1975; PNAS, 1976.</span>
+        </div>
+        <div class="timeline-note">
+          <div class="timeline-year">1980</div>
+          <h3>Many shapes coexist</h3>
+          <p>Rapid-freezing microscopy shows flat lattices and curved baskets side by side, sharpening the pathway question.</p>
+          <span class="timeline-source">Heuser, J. Cell Biol., 1980.</span>
+        </div>
+        <div class="timeline-note">
+          <div class="timeline-year">2018</div>
+          <h3>Growth conditions matter</h3>
+          <p>Experiments show that clathrin and adaptor abundance can bias whether assemblies remain flat or curve.</p>
+          <span class="timeline-source">Bucher et al., Nat. Commun., 2018.</span>
+        </div>
+        <div class="timeline-note">
+          <div class="timeline-year">2021-2023</div>
+          <h3>The coat stores mechanics</h3>
+          <p>Nanodissection and reconstructed live imaging point to prestress, curvature progression, and mechanically active lattices.</p>
+          <span class="timeline-source">Selected: Sochacki et al., Dev. Cell, 2021; Tagiltsev et al., eLife, 2021; Mund et al., Nat. Cell Biol., 2023.</span>
+        </div>
+        <div class="timeline-note is-current">
+          <div class="timeline-year">This work</div>
+          <h3>Assembly writes mechanics</h3>
+          <p>Our model lets the material properties be generated by the coat itself during growth, allowing a 
+            selection of fates.</p>
+          <span class="timeline-source">Dreckhoff, Schwarz &amp; Lettermann, arXiv:2606.30267, 2026.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="model" style="background: var(--background-primary);">
+    <div class="container">
+      <div class="section-header">
+        <h2>A minimal model respecting three main contributions</h2>
+        <p>
+          The model was built to include the three main contributors to complexity:
+           stochastic protein assembly,
+          discrete lattice geometry, and continuum membrane mechanics.
+        </p>
+      </div>
+      <div class="model-overview">
+        <div class="story-grid">
+          <div class="story-card">
+            <strong>Assembly</strong>
+            <h3>Local stochastic events</h3>
+            <p>Individual clathrin-like units bind to the membrane, diffuse, form contacts, break contacts, and leave again.</p>
+          </div>
+          <div class="story-card">
+            <strong>Geometry</strong>
+            <h3>A discrete lattice</h3>
+            <p>Those local events build a connected network with pentagons, hexagons, defects, and 
+              connectivity constraints, all on a curved surface.</p>
+          </div>
+          <div class="story-card">
+            <strong>Mechanics</strong>
+            <h3>A deformable membrane</h3>
+            <p>The coat grows on a spherical-cap membrane whose curvature can either be imposed or is allowed to adapt.</p>
+          </div>
+        </div>
+        <figure class="panel-card panel-card-feature">
+          <img src="../../assets/research/cme/figures-web/panels/fig1-panel-c.png" alt="Simulation model showing clathrin binding, diffusion, bond formation, and membrane curvature.">
+          <figcaption>Model ingredients: stochastic membrane binding, diffusion, bond 
+            formation, and membrane curvature are coupled.</figcaption>
+        </figure>
+      </div>
+      <div class="figure-story model-comparison">
+        <div>
+          <h3>From an experimental coat to a computational one</h3>
+          <p>
+            The simulation starts from the same visual object seen in microscopy: a clathrin coat sitting
+            on a membrane. We coarse-grain the coat into clathrin-like agents connected by elastic legs and
+            describe the membrane as a spherical cap.
+          </p>
+          <p>
+            This is deliberately minimal. The goal is not to simulate every molecular detail, but to ask
+            whether local assembly rules alone can create a mechanical object that chooses a fate.
+          </p>
+        </div>
+        <div class="panel-pair">
+          <figure class="panel-card">
+            <img src="../../assets/research/cme/figures-web/panels/fig1-panel-a.png" alt="AFM reconstruction of a clathrin coat on a membrane.">
+            <figcaption>Experiment: a clathrin coat reconstructed from high-speed AFM data.</figcaption>
+          </figure>
+          <figure class="panel-card">
+            <img src="../../assets/research/cme/figures-web/panels/fig1-panel-b.png" alt="Coarse-grained clathrin lattice model on a curved membrane.">
+            <figcaption>Coarse graining: clathrin-like agents form a discrete lattice on the membrane. In green is the
+              clathrin protein structure from the Protein Data Bank (PDB ID: 1XI4).</figcaption>
+          </figure>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="stiffening">
+    <div class="container">
+      <div class="section-header">
+        <h2>Growth changes the coat</h2>
+        <p>
+          The first test is controlled: let coats assemble on membranes of fixed curvature, then ask what
+          mechanical object has been built.
+        </p>
+      </div>
+      <div class="figure-story fixed-curvature-story">
+        <div>
+          <h3>Two emergent material properties</h3>
+          <p>
+            As closure increases, the lattice becomes harder to bend. At the same time, newly added
+            clathrin is relaxed at the curvature at which it joined the coat. The final coat therefore
+            carries a record of its growth history.
+          </p>
+          <ul class="insight-list">
+            <li><strong>Coat stiffening:</strong> larger, more connected coats resist curvature changes much more strongly.</li>
+            <li><strong>Curvature memory:</strong> the effective preferred curvature shifts toward the curvature present during assembly.</li>
+            <li><strong>Closure:</strong> progress is measured by how much of the available cap area is occupied by clathrin.</li>
+          </ul>
+        </div>
+        <div class="fixed-curvature-media">
+          <figure class="paper-figure">
+            <img src="../../assets/research/cme/figures-web/panels/fig2-panels-fg-colormap.png" alt="Panels F and G from Figure 2 showing coat stiffness and effective preferred curvature against closure, colored by fixed growth curvature.">
+            <figcaption>
+              Panels F and G isolate the two fixed-curvature outputs: stiffening during closure and a
+              preferred curvature that follows the curvature present during growth.
+            </figcaption>
+          </figure>
+          <figure class="video-card">
+            <video controls muted playsinline preload="metadata" poster="../../assets/research/cme/video-posters/Supplementary_Movie_S2.jpg">
+              <source src="../../assets/research/cme/SupplVideos/Supplementary_Movie_S2.mp4" type="video/mp4">
+            </video>
+            <figcaption>Supplementary Movie S2: assembly on fixed curvature, used to probe closure, stiffening, and memory.</figcaption>
+          </figure>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="fates" style="background: var(--background-primary);">
+    <div class="container">
+      <div class="section-header">
+        <h2>Let the membrane adapt, and three fates appear</h2>
+        <p>
+          Once membrane curvature is allowed to respond to the total system energy, the same microscopic
+          assembly rules branch into the main morphologies seen in experiments.
+        </p>
+      </div>
+      <div>
+        <h3>Pathway variability</h3>
+        <p>
+          The outcome is not imposed in advance. Each trajectory begins as a small, nearly flat assembly.
+          Depending on connectivity, membrane parameters, and growth history, it can stay flat, bend and
+          stall, or continue toward closure.
+        </p>
+        <div class="fate-grid">
+          <div class="fate-card fate-card-flat">
+            <h3>Flat plaque</h3>
+            <p>The coat grows in area but never becomes mechanically coherent enough to drive curvature.</p>
+          </div>
+          <div class="fate-card fate-card-aborted">
+            <h3>Aborted pit</h3>
+            <p>The coat bends the membrane, but the moving energy minimum remains inside the accessible region.</p>
+          </div>
+          <div class="fate-card fate-card-closed">
+            <h3>Closed vesicle</h3>
+            <p>The energy minimum moves toward the closure boundary and the coat follows it into a cage-like state.</p>
+          </div>
+        </div>
+      </div>
+      <div class="fate-panel-grid">
+        <figure class="panel-card">
+          <img src="../../assets/research/cme/figures-web/panels/fig3-panel-g.png" alt="Figure 3 panel G showing connectivity as a function of node number for adaptive-curvature trajectories.">
+          <figcaption>Connectivity rises differently across fates as the lattice grows.</figcaption>
+        </figure>
+        <figure class="panel-card">
+          <img src="../../assets/research/cme/figures-web/panels/fig3-panel-h.png" alt="Figure 3 panel H showing minimizing curvature as a function of closure.">
+          <figcaption>The energy-minimizing curvature separates stalled and closing paths.</figcaption>
+        </figure>
+        <figure class="panel-card">
+          <img src="../../assets/research/cme/figures-web/panels/fig3-panel-i.png" alt="Figure 3 panel I showing effective clathrin rigidity as a function of closure.">
+          <figcaption>Effective rigidity increases as the growing coat becomes mechanically coherent.</figcaption>
+        </figure>
+        <figure class="panel-card fate-colormap-card">
+          <img src="../../assets/research/cme/figures-web/panels/fig3-colormap.png" alt="Figure 3 legend for surface tension and bending length parameters.">
+          <figcaption>Parameter legend used for the adaptive-curvature trajectories.</figcaption>
+        </figure>
+      </div>
+      <div class="video-grid">
+        <figure class="video-card">
+          <video controls muted playsinline preload="metadata" poster="../../assets/research/cme/video-posters/Supplementary_Movie_S3.jpg">
+            <source src="../../assets/research/cme/SupplVideos/Supplementary_Movie_S3.mp4" type="video/mp4">
+          </video>
+          <figcaption>Flat trajectory: the coat grows without completing membrane invagination.</figcaption>
+        </figure>
+        <figure class="video-card">
+          <video controls muted playsinline preload="metadata" poster="../../assets/research/cme/video-posters/Supplementary_Movie_S4.jpg">
+            <source src="../../assets/research/cme/SupplVideos/Supplementary_Movie_S4.mp4" type="video/mp4">
+          </video>
+          <figcaption>Aborted trajectory: the coat bends the membrane but stalls before closure.</figcaption>
+        </figure>
+        <figure class="video-card">
+          <video controls muted playsinline preload="metadata" poster="../../assets/research/cme/video-posters/Supplementary_Movie_S5.jpg">
+            <source src="../../assets/research/cme/SupplVideos/Supplementary_Movie_S5.mp4" type="video/mp4">
+          </video>
+          <figcaption>Closed trajectory: growth reaches the closed-vesicle regime.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section id="mechanism">
+    <div class="container">
+      <div class="section-header">
+        <h2>Two gates control the final fate</h2>
+        <p>
+          The simulations point to two decisions, one controlled by discrete assembly and one controlled by
+          mechanics after the coat has started to behave as a connected material.
+        </p>
+      </div>
+      <div class="figure-story mechanism-panel mechanism-panel-narrow">
+        <figure class="paper-figure">
+          <img src="../../assets/research/cme/figures-web/panels/fig5-panel-a.png" alt="Figure 5 panel A showing the coarse-grained energy landscape in curvature-area coordinates.">
+          <figcaption>
+            Panel A separates polymerisation, membrane bending, and clathrin bending contributions in
+            curvature-area space.
+          </figcaption>
+        </figure>
+        <div>
+          <h3>An energy landscape for growing coats</h3>
+          <p>
+            The landscape asks where growth is energetically easy. Polymerisation pushes coats toward larger
+            occupied area, membrane bending penalizes curvature, and clathrin bending favors the curvature
+            stored in the coat.
+          </p>
+          <p>
+            Fates emerge because growth changes which part of this landscape is accessible. Early coats can
+            stay near the flat route; later coats may develop a finite-curvature minimum that pulls the system
+            toward invagination or closure.
+          </p>
+        </div>
+      </div>
+      <div class="story-grid">
+        <div class="story-card">
+          <strong>Gate 1</strong>
+          <h3>Connectivity</h3>
+          <p>The coat must become connected enough to transmit stress across the lattice.</p>
+        </div>
+        <div class="story-card">
+          <strong>Mechanics</strong>
+          <h3>Geometry-induced stiffening</h3>
+          <p>Once stress can propagate, bending a curved lattice forces small dilations that excite the costly stretching mode.</p>
+        </div>
+        <div class="story-card">
+          <strong>Gate 2</strong>
+          <h3>Growth history</h3>
+          <p>The moving energy minimum decides whether the coat stalls as an aborted pit or keeps moving toward closure.</p>
+        </div>
+      </div>
+      <div class="figure-story mechanism-panel">
+        <figure class="paper-figure">
+          <img src="../../assets/research/cme/figures-web/panels/fig5-panel-d.png" alt="Figure 5 panel D showing the two gates that lead to flat, aborted, or closed fates.">
+          <figcaption>
+            Panel D summarizes the gate logic: connectivity first creates a meaningful energy minimum, then
+            growth history decides whether that minimum stalls or moves toward closure.
+          </figcaption>
+        </figure>
+        <div>
+          <h3>How the gates read physically</h3>
+          <p>
+            Early on, polymerization favors rapid, almost flat growth. If the lattice stays loosely connected,
+            that flat route remains energetically easy. Once connectivity crosses a threshold, clathrin bending
+            begins to dominate and a finite-curvature minimum appears.
+          </p>
+          <p>
+            The second gate is later and more continuous: membrane tension, coat stiffness, and curvature memory
+            determine whether the system can catch the energy minimum as an aborted pit or is pulled toward the
+            line of full closure.
+          </p>
+        </div>
+      </div>
+      <div class="figure-story mechanism-panel">
+        <div>
+          <h3>Where the gates sit in the simulated landscape</h3>
+          <p>
+            The same logic can be mapped back onto the curvature-area plane used throughout the model. Flat,
+            aborted, and closed outcomes occupy distinct regions, and the gates describe how a growing coat
+            moves between them.
+          </p>
+        </div>
+        <figure class="paper-figure">
+          <img src="../../assets/research/cme/figures-web/panels/fig1-panel-f.png" alt="Figure 1 panel F showing flat, aborted, and closed fates organized by two gates in curvature-area space.">
+          <figcaption>
+            Figure 1F places the two gates into the curvature-area landscape of the three observed fates.
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section id="stiffness-memory" style="background: var(--background-primary);">
+    <div class="container">
+      <div class="section-header">
+        <h2>Why stiffness and memory arise</h2>
+        <p>
+          The fixed-curvature and adaptive-curvature simulations point to the same mechanism: growth turns a
+          flexible assembly into a mechanical object with history-dependent material properties.
+        </p>
+      </div>
+      <div class="figure-story">
+        <div>
+          <h3>Geometry couples bending to stretching</h3>
+          <p>
+            The theory turns the simulation result into a geometric statement. Bending a curved coat to a
+            higher curvature cannot be achieved by pure bending alone; it also creates compression and dilation
+            in the lattice. Because clathrin resists stretching much more strongly than bending, the effective
+            bending rigidity rises as the coat grows.
+          </p>
+          <p>
+            Curvature memory follows from the same idea in time: each newly incorporated clathrin is relaxed
+            at the curvature where it joined. The preferred curvature of the whole coat is therefore a weighted
+            mixture of microscopic preference and growth history.
+          </p>
+        </div>
+        <figure class="paper-figure">
+          <img src="../../assets/research/cme/figures-web/fig-4.png" alt="Theory figure explaining geometry-induced stiffening and curvature memory.">
+          <figcaption>
+            Theory and simulation align: geometry-induced stiffening and curvature memory quantitatively explain the adaptive coat.
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section id="cutting">
+    <div class="container">
+      <div class="section-header">
+        <h2>Cutting reveals stored stress</h2>
+        <p>
+          If an assembled coat stores mechanical stress, cutting it should release that stress and let the
+          remaining lattice relax. The simulations reproduce this kind of mechanical response.
+        </p>
+      </div>
+      <div class="image-video-grid">
+        <figure class="paper-figure">
+          <img src="../../assets/research/cme/figures-web/fig-6.png" alt="Figure 6 showing cutting and relaxation simulations for assembled clathrin coats.">
+          <figcaption>
+            Cutting simulations track relaxation after a section of the coat is removed, linking curvature
+            change, stiffness change, and preferred-curvature memory.
+          </figcaption>
+        </figure>
+        <figure class="video-card">
+          <video controls muted playsinline preload="metadata" poster="../../assets/research/cme/video-posters/Supplementary_Movie_S6.jpg">
+            <source src="../../assets/research/cme/SupplVideos/Supplementary_Movie_S6.mp4" type="video/mp4">
+          </video>
+          <figcaption>Supplementary Movie S6: mechanical response and relaxation of the assembled coat.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section id="media" style="background: var(--background-primary);">
+    <div class="container">
+      <div class="section-header">
+        <h2>Simulation gallery</h2>
+        <p>
+          Supplementary movies from the preprint, shown here as short visual anchors for the main mechanisms.
+        </p>
+      </div>
+      <div class="video-grid">
+        <figure class="video-card">
+          <video controls muted playsinline preload="metadata" poster="../../assets/research/cme/video-posters/Supplementary_Movie_S1.jpg">
+            <source src="../../assets/research/cme/SupplVideos/Supplementary_Movie_S1.mp4" type="video/mp4">
+          </video>
+          <figcaption>Supplementary Movie S1: growth of a clathrin assembly coupled to membrane deformation.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section id="links" class="paper-cta">
+    <div class="container">
+      <div class="section-header">
+        <h2>Read more</h2>
+        <p>
+          The full manuscript is available as an arXiv preprint. A more personal blog post about the
+          process of writing and releasing the paper will follow.
+        </p>
+      </div>
+      <div class="paper-link-list">
+        <a href="https://arxiv.org/abs/2606.30267" target="_blank" rel="noopener noreferrer" class="btn btn-primary">arXiv abstract</a>
+        <a href="https://arxiv.org/pdf/2606.30267" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">Preprint PDF</a>
+        <a href="https://doi.org/10.48550/arXiv.2606.30267" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">DOI</a>
+        <a href="../../blog/first-paper-done.html" class="btn btn-secondary">Blog post</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2026 Johannes Dreckhoff. All rights reserved.</p>
+      <p><a href="../../impressum.html">Impressum</a></p>
+    </div>
+  </footer>
+
+  <script src="../../js/main.js"></script>
+</body>
+</html>

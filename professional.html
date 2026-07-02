@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Professional background, research projects, publications, and software by Johannes Dreckhoff.">
+  <meta name="author" content="Johannes Dreckhoff">
+  <title>Professional Background - Johannes Dreckhoff</title>
+  <link rel="stylesheet" href="css/main.css">
+  <style>
+    .professional-top {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 280px;
+      gap: 2rem;
+      align-items: stretch;
+      max-width: 800px;
+      margin-bottom: 3rem;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .professional-top .section-header {
+      margin-bottom: 0;
+      text-align: left;
+    }
+
+    .professional-top .section-header h2::after {
+      left: 0;
+      transform: none;
+    }
+
+    .cv-card {
+      background: var(--background-primary);
+      border: 1px solid var(--border-color);
+      border-radius: var(--border-radius);
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .mini-timeline {
+      display: grid;
+      gap: 1rem;
+      margin: 2rem 0 3rem;
+      position: relative;
+    }
+
+    .mini-timeline-item {
+      background: var(--background-primary);
+      border: 1px solid var(--border-color);
+      border-radius: var(--border-radius);
+      display: grid;
+      grid-template-columns: 90px 1fr;
+      gap: 1rem;
+      padding: 1rem 1.25rem;
+    }
+
+    .mini-timeline-year {
+      color: var(--primary-color);
+      font-weight: 700;
+    }
+
+    .professional-grid {
+      display: grid;
+      gap: 1.5rem;
+      grid-template-columns: repeat(2, 1fr);
+      margin-top: 1.5rem;
+    }
+
+    .publication-card {
+      background: var(--background-primary);
+      border: 1px solid var(--border-color);
+      border-radius: var(--border-radius);
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .publication-card p {
+      font-size: 0.95rem;
+    }
+
+    .publication-card-feature {
+      border-color: rgba(37, 99, 235, 0.35);
+      grid-column: 1 / -1;
+    }
+
+    .publication-card-feature h4 {
+      color: var(--primary-color);
+    }
+
+    .publication-card-feature p {
+      max-width: 680px;
+    }
+
+    .publication-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-top: auto;
+    }
+
+    .publication-status {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    .btn-disabled {
+      cursor: default;
+      opacity: 0.7;
+    }
+
+    .btn-disabled:hover {
+      background: var(--background-primary);
+      color: var(--primary-color);
+      text-decoration: none;
+    }
+
+    @media (max-width: 900px) {
+      .professional-top,
+      .professional-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .professional-top .section-header {
+        text-align: center;
+      }
+
+      .professional-top .section-header h2::after {
+        left: 50%;
+        transform: translateX(-50%);
+      }
+    }
+
+    @media (max-width: 560px) {
+      .mini-timeline-item {
+        grid-template-columns: 1fr;
+        gap: 0.25rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header & Navigation -->
+  <header>
+    <div class="container">
+      <a href="index.html" class="logo">Johannes Dreckhoff</a>
+      <nav>
+        <a href="index.html#about">About</a>
+        <a href="professional.html">Professional</a>
+        <a href="index.html#gallery">Gallery</a>
+        <a href="places.html">Places</a>
+        <a href="blog/index.html">Blog</a>
+        <a href="index.html#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Professional Bio Section -->
+  <section id="professional">
+    <div class="container">
+      <div class="professional-top">
+        <div class="section-header">
+          <h2>Professional Background</h2>
+          <p>Physics, theoretical biophysics, and computational modeling.</p>
+        </div>
+        <div class="cv-card">
+          <h3>Curriculum Vitae</h3>
+          <p>Academic background, research experience, and selected projects.</p>
+          <a href="assets/documents/CV Johannes Dreckhoff.pdf" target="_blank" class="btn btn-primary">Download CV</a>
+        </div>
+      </div>
+
+      <div class="bio-content">
+        <h3>Education</h3>
+        <p>
+          I studied physics at Heidelberg University, with a growing focus on theoretical biophysics,
+          nonlinear pattern formation, and simulation-based models of cellular processes. My bachelor thesis
+          explored pattern formation in lipid membranes; my master thesis moved toward clathrin-mediated
+          endocytosis and the mechanics of growing protein coats on membranes.
+        </p>
+
+        <div class="mini-timeline" aria-label="Academic timeline">
+          <div class="mini-timeline-item">
+            <div class="mini-timeline-year">2019</div>
+            <div>Started studying physics at Heidelberg University.</div>
+          </div>
+          <div class="mini-timeline-item">
+            <div class="mini-timeline-year">2023</div>
+            <div>Erasmus exchange at Leiden University, Netherlands.</div>
+          </div>
+          <div class="mini-timeline-item">
+            <div class="mini-timeline-year">2025</div>
+            <div>Master's degree in physics, Heidelberg University.</div>
+          </div>
+          <div class="mini-timeline-item">
+            <div class="mini-timeline-year">2026</div>
+            <div>Research assistant in the Schwarz group, Heidelberg University.</div>
+          </div>
+          <div class="mini-timeline-item">
+            <div class="mini-timeline-year">2026</div>
+            <div>Start of PhD work at ISTA.</div>
+          </div>
+        </div>
+
+        <h3>Current Research</h3>
+        <p>
+          I recently released a preprint based on my master thesis work in the Schwarz group.
+          The project studies how clathrin coats grow, stiffen, and deform membranes during
+          clathrin-mediated endocytosis. In September 2026, I will start my PhD at ISTA.
+        </p>
+
+        <h3>Publications &amp; Theses</h3>
+        <div class="professional-grid">
+          <div class="publication-card">
+            <h4>Bachelor Thesis</h4>
+            <p>
+              Pattern Formation in Lipid Membranes (2023)
+            </p>
+            <div class="publication-actions">
+              <a href="assets/documents/bachelor-thesis.pdf" target="_blank" class="btn btn-primary">Download PDF</a>
+            </div>
+          </div>
+
+          <div class="publication-card">
+            <h4>Master Thesis</h4>
+            <p>
+              Curvature Generation in Clathrin-Mediated Endocytosis (2024-2025)
+            </p>
+            <div class="publication-actions">
+              <a href="assets/documents/Master Thesis Johannes Dreckhoff.pdf" target="_blank" class="btn btn-primary">Download PDF</a>
+            </div>
+          </div>
+
+          <div class="publication-card publication-card-feature" id="cme-paper">
+            <h4>Pathway variability, coat stiffening and mechanical adaptation during clathrin-mediated endocytosis (2026)</h4>
+           
+            <p class="publication-status">arXiv preprint available; manuscript under review. Visit my visual guide or download the manuscript directly.</p>
+            <div class="publication-actions">
+              <a href="research/cme/index.html" class="btn btn-primary">Visual guide</a>
+              <a href="https://arxiv.org/abs/2606.30267" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">arXiv</a>
+              <a href="https://arxiv.org/pdf/2606.30267" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">PDF</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p>&copy; 2026 Johannes Dreckhoff. All rights reserved.</p>
+      <p><a href="impressum.html">Impressum</a></p>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

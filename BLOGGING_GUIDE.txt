@@ -1,0 +1,118 @@
+Wie du einen neuen Blog-Eintrag schreibst
+===========================================
+
+Diese Website benutzt einfache HTML-Dateien. Es gibt keinen Build-Schritt und
+keine Blog-Engine. Ein neuer Blog-Eintrag besteht deshalb aus einer neuen
+HTML-Datei plus einem Link im Blog-Index.
+
+1. Neue Post-Datei anlegen
+--------------------------
+
+Kopiere die bestehende Beispiel-Datei:
+
+  blog/welcome.html
+
+zu einer neuen Datei mit kurzem, URL-freundlichem Namen, zum Beispiel:
+
+  blog/mein-neuer-post.html
+
+Nutze am besten nur Kleinbuchstaben, Bindestriche und keine Leerzeichen.
+
+2. HTML-Metadaten anpassen
+--------------------------
+
+Passe in der neuen Datei diese Stellen an:
+
+  - den Text in <meta name="description" ...>
+  - den <title>...</title>
+  - die sichtbare <h1>-Überschrift
+  - das Datum
+  - die Kategorie
+  - die geschätzte Lesezeit
+
+Der CSS-Link bleibt bei Blog-Posts so:
+
+  ../css/main.css
+
+Der Grund: Blog-Posts liegen im Ordner blog/ und müssen daher eine Ebene nach
+oben gehen, um den css/-Ordner zu finden.
+
+3. Inhalt schreiben
+-------------------
+
+Ersetze den Inhalt innerhalb dieses Blocks:
+
+  <div class="blog-content">
+    ...
+  </div>
+
+Du kannst normales HTML verwenden:
+
+  <h2>Zwischenüberschrift</h2>
+  <p>Dein Absatz.</p>
+  <ul>
+    <li>Ein Listenpunkt</li>
+  </ul>
+
+Für Links zu Dateien in assets/ musst du vom blog/-Ordner aus denken:
+
+  <a href="../assets/documents/example.pdf">PDF herunterladen</a>
+  <img src="../assets/gallery/example.jpg" alt="Kurze Bildbeschreibung">
+
+4. Post im Blog-Index verlinken
+-------------------------------
+
+Öffne:
+
+  blog/index.html
+
+Kopiere einen bestehenden Block:
+
+  <article class="blog-post-item">...</article>
+
+und füge ihn oberhalb der älteren Posts ein. Passe dann an:
+
+  - href="mein-neuer-post.html"
+  - Titel
+  - Datum
+  - Kategorie
+  - Lesezeit
+  - Kurzbeschreibung
+
+5. Optional: Post auf der Startseite anzeigen
+---------------------------------------------
+
+Öffne:
+
+  index.html
+
+Wenn der Post auch auf der Startseite erscheinen soll, füge in der Section
+"Thoughts & Writing" eine passende Preview-Card in die blog-preview-grid ein.
+
+Der Link von der Startseite braucht den blog/-Prefix:
+
+  <a href="blog/mein-neuer-post.html">Post-Titel</a>
+
+6. Lokal testen
+---------------
+
+Starte im Website-Hauptordner einen kleinen lokalen Server:
+
+  python3 -m http.server 8000
+
+Öffne danach:
+
+  http://localhost:8000
+
+Prüfe den neuen Post, den Blog-Index, Navigation, Bilder und die mobile Ansicht.
+
+7. Committen und veröffentlichen
+--------------------------------
+
+Wenn alles passt:
+
+  git status
+  git add blog/mein-neuer-post.html blog/index.html
+  git add index.html   # nur falls du eine Startseiten-Preview ergänzt hast
+  git commit -m "Add blog post about ..."
+  git push
