@@ -6,6 +6,16 @@
   <meta name="description" content="Visual guide to the arXiv preprint on pathway variability, coat stiffening, and mechanical adaptation during clathrin-mediated endocytosis.">
   <title>Pathway Variability in Clathrin-Mediated Endocytosis | Johannes Dreckhoff</title>
   <link rel="stylesheet" href="../../css/main.css">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)']],
+        displayMath: [['\\[', '\\]']],
+        processEscapes: true
+      }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
   <style>
     .paper-hero {
       background: var(--background-primary);
@@ -153,6 +163,17 @@
       background: var(--background-secondary);
       color: var(--primary-color);
       text-decoration: none;
+    }
+
+    .paper-nav a.is-active,
+    .paper-nav a[aria-current="true"] {
+      background: var(--primary-color);
+      color: white;
+      text-decoration: none;
+    }
+
+    section[id] {
+      scroll-margin-top: 140px;
     }
 
     .story-grid {
@@ -366,41 +387,34 @@
     }
 
     .fate-card {
-      background: var(--background-primary);
       border: 1px solid var(--border-color);
       border-radius: var(--border-radius);
+      color: white;
       padding: 1.25rem;
     }
 
     .fate-card h3 {
+      color: white;
       margin-bottom: 0.5rem;
     }
 
-    .fate-card-flat {
-      background: rgba(22, 163, 74, 0.08);
-      border-color: rgba(22, 163, 74, 0.45);
+    .fate-card p {
+      color: rgba(255, 255, 255, 0.9);
     }
 
-    .fate-card-flat h3 {
-      color: #15803d;
+    .fate-card-flat {
+      background: #15803d;
+      border-color: #166534;
     }
 
     .fate-card-aborted {
-      background: rgba(190, 24, 93, 0.08);
-      border-color: rgba(190, 24, 93, 0.45);
-    }
-
-    .fate-card-aborted h3 {
-      color: #be185d;
+      background: #be185d;
+      border-color: #9d174d;
     }
 
     .fate-card-closed {
-      background: rgba(37, 99, 235, 0.08);
-      border-color: rgba(37, 99, 235, 0.45);
-    }
-
-    .fate-card-closed h3 {
-      color: var(--primary-color);
+      background: var(--primary-color);
+      border-color: var(--primary-hover);
     }
 
     .figure-story .fate-grid {
@@ -410,22 +424,29 @@
     .fate-panel-grid {
       display: grid;
       gap: 1rem;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+      grid-template-columns: repeat(6, minmax(0, 1fr));
       margin-top: 2rem;
+    }
+
+    .fate-panel-grid .panel-card {
+      grid-column: span 2;
     }
 
     .fate-panel-grid .panel-card img {
       background: var(--background-primary);
+      height: 260px;
       margin: 0 auto;
-      max-width: 260px;
       object-fit: contain;
     }
 
-    .fate-colormap-card {
+    .fate-panel-grid .fate-panel-e-card {
+      grid-column: 2 / span 2;
+    }
+
+    .fate-panel-grid .fate-colormap-card {
       align-self: end;
-      grid-column: 3;
-      justify-self: end;
-      max-width: 220px;
+      grid-column: 4 / span 2;
+      justify-self: stretch;
     }
 
     .mechanism-panel {
@@ -531,6 +552,11 @@
         justify-self: stretch;
         max-width: none;
       }
+
+      .fate-panel-grid .panel-card,
+      .fate-panel-e-card {
+        grid-column: auto;
+      }
     }
 
     @media (max-width: 700px) {
@@ -551,6 +577,7 @@
       <nav>
         <a href="../../index.html#about">About</a>
         <a href="../../professional.html">Professional</a>
+        <a href="../../projects.html">Projects</a>
         <a href="../../index.html#gallery">Gallery</a>
         <a href="../../places.html">Places</a>
         <a href="../../blog/index.html">Blog</a>
@@ -731,32 +758,35 @@
   <section id="stiffening">
     <div class="container">
       <div class="section-header">
-        <h2>Growth changes the coat</h2>
+        <h2>Clathrin Coats Stiffen and Remember their Curvature During Growth</h2>
         <p>
-          The first test is controlled: let coats assemble on membranes of fixed curvature, then ask what
-          mechanical object has been built.
+          The first scenario is coat growth at fixed curvature. This is the equivalent of coat growth on fixed beads on cells. The
+          advantage is that this decouples membrane deformations from coat development, easing interpretation.
         </p>
       </div>
       <div class="figure-story fixed-curvature-story">
         <div>
-          <h3>Two emergent material properties</h3>
+          <h3>Two Material Properties Emerge</h3>
           <p>
-            As closure increases, the lattice becomes harder to bend. At the same time, newly added
-            clathrin is relaxed at the curvature at which it joined the coat. The final coat therefore
-            carries a record of its growth history.
+            As closure – the ratio of occupied area to total area of a sphere at a given curvature – increases, the 
+            lattice becomes harder to bend. At the same time, the preferred curvature of the entire coat shifts
+            away from the microscopically preferred curvature. The first effect is due to residual stresses forming when
+            a spherical cap is deformed that cannot be relaxed, activating the bulk modulus. As the bulk modulus is much higher
+            than the bending modulus, this effectively stiffens the coat. The second effect, which we name <I>Curvature Memory</I>, is due
+            to clathrin being incorporated relaxed at its growth curvature, thereby carrying a record of its growth history.
           </p>
           <ul class="insight-list">
-            <li><strong>Coat stiffening:</strong> larger, more connected coats resist curvature changes much more strongly.</li>
-            <li><strong>Curvature memory:</strong> the effective preferred curvature shifts toward the curvature present during assembly.</li>
-            <li><strong>Closure:</strong> progress is measured by how much of the available cap area is occupied by clathrin.</li>
-          </ul>
+            <li><strong>Coat stiffening:</strong> sufficiently connected, more curved coats resist curvature changes much more strongly.</li>
+            <li><strong>Curvature memory:</strong> the effective preferred curvature of the entire coat shifts toward the curvature present during assembly.</li>          </ul>
         </div>
         <div class="fixed-curvature-media">
           <figure class="paper-figure">
             <img src="../../assets/research/cme/figures-web/panels/fig2-panels-fg-colormap.png" alt="Panels F and G from Figure 2 showing coat stiffness and effective preferred curvature against closure, colored by fixed growth curvature.">
             <figcaption>
-              Panels F and G isolate the two fixed-curvature outputs: stiffening during closure and a
-              preferred curvature that follows the curvature present during growth.
+              Panels F and G show the emergent mechanical properties: F) shows stiffening during closure, as the bending
+              rigidity \(\kappa_{\rm eff}\) grows over orders of magnitude. G) shows curvature memory. The energy minimizing curvature
+              for the entire coat, \(H_{\rm min}^{\rm eff}\), shifts from the microscopically preferred curvature to the growth curvature.
+              The colorbar shows the constant growth curvature for the different runs.
             </figcaption>
           </figure>
           <figure class="video-card">
@@ -773,7 +803,7 @@
   <section id="fates" style="background: var(--background-primary);">
     <div class="container">
       <div class="section-header">
-        <h2>Let the membrane adapt, and three fates appear</h2>
+        <h2>If the Membrane is Allowed to Adapt, Three Fates Emerge</h2>
         <p>
           Once membrane curvature is allowed to respond to the total system energy, the same microscopic
           assembly rules branch into the main morphologies seen in experiments.
@@ -789,30 +819,40 @@
         <div class="fate-grid">
           <div class="fate-card fate-card-flat">
             <h3>Flat plaque</h3>
-            <p>The coat grows in area but never becomes mechanically coherent enough to drive curvature.</p>
+            <p>The coat grows in area but never becomes mechanically coherent enough to transmit tresses and 
+              stiffen enough.</p>
           </div>
           <div class="fate-card fate-card-aborted">
             <h3>Aborted pit</h3>
-            <p>The coat bends the membrane, but the moving energy minimum remains inside the accessible region.</p>
+            <p>The coat bends the membrane, but stalls before reaching full closure in limited time.</p>
           </div>
           <div class="fate-card fate-card-closed">
             <h3>Closed vesicle</h3>
-            <p>The energy minimum moves toward the closure boundary and the coat follows it into a cage-like state.</p>
+            <p>The system continues to bend and achieves closure.</p>
           </div>
         </div>
       </div>
       <div class="fate-panel-grid">
         <figure class="panel-card">
           <img src="../../assets/research/cme/figures-web/panels/fig3-panel-g.png" alt="Figure 3 panel G showing connectivity as a function of node number for adaptive-curvature trajectories.">
-          <figcaption>Connectivity rises differently across fates as the lattice grows.</figcaption>
+          <figcaption>Connectivity rises differently across fates as the lattice grows. There is a clear distinction
+            between curvature generating coats – implementing clathrin at a high, and rising, connectivity – and flat
+            plaques, whose clathrin implementation remains at low connectivity.
+          </figcaption>
         </figure>
         <figure class="panel-card">
           <img src="../../assets/research/cme/figures-web/panels/fig3-panel-h.png" alt="Figure 3 panel H showing minimizing curvature as a function of closure.">
-          <figcaption>The energy-minimizing curvature separates stalled and closing paths.</figcaption>
+          <figcaption>For both, aborted and closed lattices, the preferred curvature of the entire coat
+            shifts during growth.</figcaption>
         </figure>
         <figure class="panel-card">
           <img src="../../assets/research/cme/figures-web/panels/fig3-panel-i.png" alt="Figure 3 panel I showing effective clathrin rigidity as a function of closure.">
-          <figcaption>Effective rigidity increases as the growing coat becomes mechanically coherent.</figcaption>
+          <figcaption>Effective rigidity increases as the growing coat becomes mechanically coherent for 
+            both aborted and closed lattices.</figcaption>
+        </figure>
+        <figure class="panel-card fate-panel-e-card">
+          <img src="../../assets/research/cme/figures-web/panels/fig3-panel-e.png" alt="Figure 3 panel E showing representative trajectories for flat, aborted, and closed fates.">
+          <figcaption>Representative adaptive-curvature trajectories show how flat, aborted, and closed fates separate during growth.</figcaption>
         </figure>
         <figure class="panel-card fate-colormap-card">
           <img src="../../assets/research/cme/figures-web/panels/fig3-colormap.png" alt="Figure 3 legend for surface tension and bending length parameters.">
@@ -1037,5 +1077,49 @@
   </footer>
 
   <script src="../../js/main.js"></script>
+  <script>
+    const paperNavLinks = Array.from(document.querySelectorAll('.paper-nav a[href^="#"]'));
+    const paperSections = paperNavLinks
+      .map((link) => document.querySelector(link.getAttribute('href')))
+      .filter(Boolean);
+
+    const setActiveSection = (sectionId) => {
+      paperNavLinks.forEach((link) => {
+        const isActive = link.getAttribute('href') === `#${sectionId}`;
+        link.classList.toggle('is-active', isActive);
+        if (isActive) {
+          link.setAttribute('aria-current', 'true');
+        } else {
+          link.removeAttribute('aria-current');
+        }
+      });
+    };
+
+    if (paperSections.length > 0) {
+      let navUpdateQueued = false;
+
+      const updateActiveNav = () => {
+        const markerY = window.innerHeight * 0.35;
+        const activeSection = paperSections.reduce((current, section) => {
+          const rect = section.getBoundingClientRect();
+          return rect.top <= markerY ? section : current;
+        }, paperSections[0]);
+
+        setActiveSection(activeSection.id);
+        navUpdateQueued = false;
+      };
+
+      const queueNavUpdate = () => {
+        if (!navUpdateQueued) {
+          navUpdateQueued = true;
+          window.requestAnimationFrame(updateActiveNav);
+        }
+      };
+
+      window.addEventListener('scroll', queueNavUpdate, { passive: true });
+      window.addEventListener('resize', queueNavUpdate);
+      updateActiveNav();
+    }
+  </script>
 </body>
 </html>

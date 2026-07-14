@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Magical Unemployment, a playable roguelike deckbuilder by Johannes Dreckhoff.">
+  <meta name="author" content="Johannes Dreckhoff">
+  <title>Magical Unemployment - Johannes Dreckhoff</title>
+  <link rel="stylesheet" href="../../css/main.css">
+</head>
+<body>
+  <header>
+    <div class="container">
+      <a href="../../index.html" class="logo">Johannes Dreckhoff</a>
+      <nav>
+        <a href="../../index.html#about">About</a>
+        <a href="../../professional.html">Professional</a>
+        <a href="../../projects.html">Projects</a>
+        <a href="../../index.html#gallery">Gallery</a>
+        <a href="../../places.html">Places</a>
+        <a href="../../blog/index.html">Blog</a>
+        <a href="../../index.html#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="project-hero">
+    <div class="container project-hero-grid">
+      <div>
+        <div class="project-kicker">Playable game</div>
+        <h1>Magical Unemployment</h1>
+        <p class="project-meta">A roguelike deckbuilder about being unemployed, applying for jobs, and surviving strange evening card duels.</p>
+        <p>
+          You spend the day sending applications and waiting for replies. At night, you play card battles
+          to recover enough mental energy to keep going. Wins bring money, booster packs grow your collection,
+          and the run ends either with a job offer or by defeating Die Personalabteilung.
+        </p>
+        <div class="project-actions">
+          <a href="https://github.com/Dreckhoff/magical_unemployment" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Open GitHub repo</a>
+          <a href="#play" class="btn btn-secondary">How to play</a>
+        </div>
+      </div>
+      <div class="game-preview" aria-hidden="true">
+        <div class="game-window">
+          <div class="game-window-bar">
+            <span class="game-window-dot"></span>
+            <span class="game-window-dot"></span>
+            <span class="game-window-dot"></span>
+          </div>
+          <p class="game-title">Magical Unemployment</p>
+          <div class="game-card-row">
+            <div class="game-card-mini"><strong>Cover Letter</strong><span>+2</span></div>
+            <div class="game-card-mini"><strong>Booster Pack</strong><span>?</span></div>
+            <div class="game-card-mini"><strong>HR Boss</strong><span>8</span></div>
+          </div>
+          <div class="game-status-line">
+            <span>Mental energy: 7</span>
+            <span>Applications sent: 3</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="section-header">
+        <h2>What kind of game is it?</h2>
+        <p>A small Python/Pygame project mixing a meta-layer with card combat.</p>
+      </div>
+      <div class="project-section-grid">
+        <div class="project-info-card">
+          <h3>Day cycle</h3>
+          <p>
+            Mornings are for applications. Replies arrive later, usually as rejections,
+            but one job offer is a possible win condition.
+          </p>
+        </div>
+        <div class="project-info-card">
+          <h3>Deckbuilder loop</h3>
+          <p>
+            Evening duels earn money. Money buys booster packs. Booster packs expand
+            the collection used to build a 20-card deck.
+          </p>
+        </div>
+        <div class="project-info-card">
+          <h3>Playable status</h3>
+          <p>
+            The current repository README describes Phase 2 + 3 as playable, with GUI,
+            meta-layer, save/load, and 25 YAML-defined cards.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="play" style="background: var(--background-primary);">
+    <div class="container">
+      <div class="section-header">
+        <h2>How to play locally</h2>
+        <p>Clone the repository, install the Python dependencies, and start the Pygame version.</p>
+      </div>
+
+      <div class="setup-panel">
+        <h3>Recommended terminal setup</h3>
+        <p>
+          After cloning the repository and installing the dependencies once, macOS users can start the
+          game later by double-clicking <code>Magical Unemployment.command</code>.
+        </p>
+        <pre><code>git clone https://github.com/Dreckhoff/magical_unemployment.git
+cd magical_unemployment
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+python play_gui.py</code></pre>
+      </div>
+
+      <div class="setup-panel">
+        <h3>Other useful commands</h3>
+        <p>
+          You can always start the graphical version from the terminal with <code>python play_gui.py</code>.
+          The older terminal menu is still available via <code>python play.py</code>.
+        </p>
+        <pre><code>pytest
+python play.py</code></pre>
+      </div>
+
+      <div class="setup-panel">
+        <h3>Requirements</h3>
+        <p>
+          The project declares Python 3.11 or newer. Its listed dependencies are
+          <code>pygame-ce</code>, <code>pyyaml</code>, and <code>pytest</code>.
+        </p>
+        <div class="project-actions">
+          <a href="https://github.com/Dreckhoff/magical_unemployment" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Open repository</a>
+          <a href="../../projects.html" class="btn btn-secondary">Back to projects</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2026 Johannes Dreckhoff. All rights reserved.</p>
+      <p><a href="../../impressum.html">Impressum</a></p>
+    </div>
+  </footer>
+
+  <script src="../../js/main.js"></script>
+</body>
+</html>
