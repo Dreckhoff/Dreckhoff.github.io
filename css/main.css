@@ -386,6 +386,101 @@ nav a:hover {
   width: 100%;
 }
 
+.mu-project-thumbnail {
+  aspect-ratio: 16 / 10;
+  background: #0d111c;
+  color: white;
+  display: block;
+  isolation: isolate;
+  overflow: hidden;
+  position: relative;
+}
+
+.mu-project-thumbnail::after {
+  background:
+    linear-gradient(180deg, rgba(7, 10, 17, 0.28) 0%, transparent 42%, rgba(7, 10, 17, 0.93) 100%),
+    linear-gradient(90deg, rgba(7, 10, 17, 0.2), transparent 42%);
+  content: "";
+  inset: 0;
+  pointer-events: none;
+  position: absolute;
+  z-index: 1;
+}
+
+.mu-project-thumbnail img {
+  height: 100%;
+  image-rendering: pixelated;
+  object-fit: cover;
+  object-position: center;
+  transform: scale(1.015);
+  transition: transform 350ms ease, filter 350ms ease;
+}
+
+.mu-project-thumb-badge {
+  background: #f0c62e;
+  box-shadow: 4px 4px 0 rgba(7, 10, 17, 0.75);
+  color: #0d111c;
+  font-size: 0.7rem;
+  font-weight: 800;
+  left: 1rem;
+  letter-spacing: 0.09em;
+  padding: 0.45rem 0.65rem;
+  position: absolute;
+  text-transform: uppercase;
+  top: 1rem;
+  z-index: 2;
+}
+
+.mu-project-thumb-copy {
+  align-items: end;
+  bottom: 0;
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+  left: 0;
+  padding: 1.25rem;
+  position: absolute;
+  right: 0;
+  z-index: 2;
+}
+
+.mu-project-thumb-copy strong {
+  color: white;
+  font-size: 1.3rem;
+  letter-spacing: -0.025em;
+  line-height: 1.15;
+}
+
+.mu-project-thumb-copy > span {
+  color: #d8dfec;
+  font-size: 0.78rem;
+  font-weight: 700;
+  line-height: 1.35;
+  text-align: right;
+}
+
+.mu-project-thumb-copy b {
+  color: #f0c62e;
+  font-size: 1rem;
+  margin-left: 0.25rem;
+}
+
+.mu-project-thumbnail:hover {
+  color: white;
+  text-decoration: none;
+}
+
+.mu-game-project-card:hover .mu-project-thumbnail img,
+.mu-project-thumbnail:focus-visible img {
+  filter: saturate(1.12) brightness(1.04);
+  transform: scale(1.055);
+}
+
+.mu-project-thumbnail:focus-visible {
+  outline: 3px solid var(--primary-color);
+  outline-offset: -3px;
+}
+
 .project-card-body {
   display: flex;
   flex: 1;
@@ -968,5 +1063,26 @@ footer a:hover {
 
   form {
     padding: 1.5rem;
+  }
+
+  .mu-project-thumb-copy {
+    align-items: start;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+
+  .mu-project-thumb-copy > span {
+    text-align: left;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mu-project-thumbnail img {
+    transition: none;
+  }
+
+  .mu-game-project-card:hover .mu-project-thumbnail img,
+  .mu-project-thumbnail:focus-visible img {
+    transform: scale(1.015);
   }
 }

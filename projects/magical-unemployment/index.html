@@ -3,19 +3,23 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Magical Unemployment — a roguelike deckbuilder about job applications and evening card duels, built in Python with a fully data-driven card engine.">
+  <meta name="description" content="Magical Unemployment is a playable roguelike deckbuilder about job applications by day and absurd card duels by night, built in Python and Pygame.">
   <meta name="author" content="Johannes Dreckhoff">
-  <title>Magical Unemployment - Johannes Dreckhoff</title>
+  <meta name="theme-color" content="#101420">
+  <title>Magical Unemployment | Johannes Dreckhoff</title>
   <link rel="stylesheet" href="../../css/main.css?v=20260716">
+  <link rel="stylesheet" href="style.css?v=20261023">
 </head>
-<body>
+<body class="mu-page">
+  <a class="mu-skip-link" href="#main-content">Skip to content</a>
+
   <header>
     <div class="container">
       <a href="../../index.html" class="logo">Johannes Dreckhoff</a>
-      <nav>
+      <nav aria-label="Main navigation">
         <a href="../../index.html#about">About</a>
         <a href="../../professional.html">Professional</a>
-        <a href="../../projects.html">Projects</a>
+        <a href="../../projects.html" aria-current="page">Projects</a>
         <a href="../../index.html#gallery">Gallery</a>
         <a href="../../places.html">Places</a>
         <a href="../../blog/index.html">Blog</a>
@@ -24,224 +28,280 @@
     </div>
   </header>
 
-  <section class="project-hero">
-    <div class="container project-hero-grid">
-      <div>
-        <div class="project-kicker">Playable game · Python + Pygame</div>
-        <h1>Magical Unemployment</h1>
-        <p class="project-meta">A roguelike deckbuilder about being unemployed: send job applications by day, fight absurd card duels by night.</p>
-        <p>
-          Mornings are for cover letters, booster drafts, and furnishing your tiny apartment.
-          Evenings you battle a ladder of bosses — from Stinkender Sebastian ("I skipped the shower
-          just for this duel") to the final Personalabteilung. Rejection letters pile up in your
-          inbox; if one miraculously turns into an interview, the job itself is decided in a special
-          duel against Die Personalerin. Two ways to win a run: land the job, or beat all eight
-          bosses and stop needing one.
-        </p>
-        <div class="project-actions">
-          <a href="https://github.com/Dreckhoff/magical_unemployment" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Open GitHub repo</a>
-          <a href="#play" class="btn btn-secondary">Download &amp; play</a>
-        </div>
-      </div>
-      <div class="game-preview" aria-hidden="true">
-        <div class="game-window">
-          <div class="game-window-bar">
-            <span class="game-window-dot"></span>
-            <span class="game-window-dot"></span>
-            <span class="game-window-dot"></span>
+  <main id="main-content">
+    <section class="mu-hero">
+      <div class="container mu-hero-grid">
+        <div class="mu-hero-copy">
+          <p class="mu-eyebrow"><span class="mu-status-dot" aria-hidden="true"></span> Playable prototype · Python + Pygame</p>
+          <h1>Magical<br><span>Unemployment</span></h1>
+          <p class="mu-hero-lead">
+            Send applications by day. Fight strange card duels by night.
+            Somehow, both are about surviving until the next morning.
+          </p>
+          <p class="mu-hero-body">
+            A German-language roguelike deckbuilder where an awkward job hunt becomes the
+            strategy layer for a growing deck, a tiny apartment, and an eight-boss climb.
+          </p>
+          <div class="mu-actions">
+            <a href="#play" class="mu-button mu-button-primary">Download &amp; play <span aria-hidden="true">↓</span></a>
+            <a href="https://github.com/Dreckhoff/magical_unemployment" target="_blank" rel="noopener noreferrer" class="mu-button mu-button-ghost">View on GitHub <span aria-hidden="true">↗</span></a>
           </div>
-          <p class="game-title">Magical Unemployment</p>
-          <div class="game-card-row">
-            <div class="game-card-mini"><strong>Feuerdrache</strong><span>4/4</span></div>
-            <div class="game-card-mini"><strong>Aktenschredder</strong><span>⚙</span></div>
-            <div class="game-card-mini"><strong>Wutbewerbung</strong><span>-3</span></div>
+          <dl class="mu-stats" aria-label="Game at a glance">
+            <div><dt>54</dt><dd>cards</dd></div>
+            <div><dt>8</dt><dd>bosses</dd></div>
+            <div><dt>2</dt><dd>ways to win</dd></div>
+          </dl>
+        </div>
+
+        <figure class="mu-screen mu-screen-hero">
+          <div class="mu-screen-topbar" aria-hidden="true">
+            <span></span><span></span><span></span>
+            <small>current build</small>
           </div>
-          <div class="game-status-line">
-            <span>Leben: 22 · Mana: 5</span>
-            <span>Absagen gesammelt: 7</span>
+          <img src="../../assets/projects/magical-unemployment/main-menu.png" alt="Magical Unemployment main menu over a pixel-art city at night" width="1280" height="800" fetchpriority="high">
+          <figcaption>Built from scratch as a solo hobby project.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <nav class="mu-subnav" aria-label="On this page">
+      <div class="container">
+        <a href="#game-loop">Game loop</a>
+        <a href="#deckbuilding">Deckbuilding</a>
+        <a href="#screens">Screens</a>
+        <a href="#play">Play</a>
+        <a href="#under-the-hood">Under the hood</a>
+      </div>
+    </nav>
+
+    <section id="game-loop" class="mu-section">
+      <div class="container">
+        <div class="mu-intro-grid">
+          <div>
+            <p class="mu-section-label">The premise</p>
+            <h2>Unemployment is the overworld.</h2>
+          </div>
+          <p class="mu-section-lead">
+            Every run alternates between a mundane morning and a magical evening.
+            Spend scarce money on applications, cards, or your apartment—then find out
+            whether the deck you built can carry you through the night.
+          </p>
+        </div>
+
+        <ol class="mu-loop" aria-label="A typical day in the game">
+          <li>
+            <span class="mu-loop-number">01</span>
+            <h3>Apply</h3>
+            <p>Write cover letters and wait for replies that are usually creative rejections.</p>
+          </li>
+          <li>
+            <span class="mu-loop-number">02</span>
+            <h3>Build</h3>
+            <p>Draft boosters, tune your deck, and choose which synergies deserve your money.</p>
+          </li>
+          <li>
+            <span class="mu-loop-number">03</span>
+            <h3>Upgrade</h3>
+            <p>Furnish a tiny apartment for persistent bonuses in the duels ahead.</p>
+          </li>
+          <li>
+            <span class="mu-loop-number">04</span>
+            <h3>Duel</h3>
+            <p>Read the boss intent, commit attackers, hold blockers back, and survive the night.</p>
+          </li>
+        </ol>
+
+        <div class="mu-feature-row">
+          <figure class="mu-screen">
+            <img src="../../assets/projects/magical-unemployment/day-hub.png" alt="Day hub with inbox, available actions, money and the next boss" width="1280" height="800" loading="lazy">
+          </figure>
+          <div class="mu-feature-copy">
+            <p class="mu-section-label">By day</p>
+            <h3>The job hunt is a resource puzzle.</h3>
+            <p>
+              Applications cost money and take time to answer. Booster packs strengthen the deck;
+              furniture strengthens every future duel. There is never quite enough cash for all three.
+            </p>
+            <ul class="mu-check-list">
+              <li>Delayed application replies and readable email threads</li>
+              <li>Interview invitations become special boss fights</li>
+              <li>Apartment upgrades create permanent run bonuses</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="mu-feature-row mu-feature-row-reverse">
+          <figure class="mu-screen">
+            <img src="../../assets/projects/magical-unemployment/duel.png" alt="Card duel against Stinkender Sebastian with creatures, lands, cards in hand and a visible next action" width="1280" height="800" loading="lazy">
+          </figure>
+          <div class="mu-feature-copy">
+            <p class="mu-section-label mu-section-label-red">By night</p>
+            <h3>Every boss tells you what comes next.</h3>
+            <p>
+              Combat is about timing: play lands, assemble an engine, choose attackers, and decide
+              which creatures must stay behind. Boss intents make the danger legible without making
+              the answer obvious.
+            </p>
+            <ul class="mu-check-list">
+              <li>Eight opponents with distinct repeating action patterns</li>
+              <li>Animated attacks, damage, deaths, draws, and boss announcements</li>
+              <li>Two victory routes: land a job or defeat the final department</li>
+            </ul>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section>
-    <div class="container">
-      <div class="section-header">
-        <h2>What's in the game?</h2>
-        <p>A full run loop: economy, deckbuilding, base building, and turn-based combat.</p>
-      </div>
-      <div class="project-section-grid">
-        <div class="project-info-card">
-          <h3>Day cycle &amp; job hunt</h3>
-          <p>
-            Applications cost postage and dignity, replies arrive days later as (mostly) creative
-            rejections — each one a readable email thread with your absurd cover letter. Interview
-            invitations lead to a winnable job duel.
+    <section id="deckbuilding" class="mu-dark-section">
+      <div class="container mu-dark-grid">
+        <figure class="mu-screen mu-screen-dark">
+          <img src="../../assets/projects/magical-unemployment/starter-draft.png" alt="Starter deck draft showing a choice between three pixel-art cards" width="1280" height="800" loading="lazy">
+        </figure>
+        <div>
+          <p class="mu-section-label">Your run, your deck</p>
+          <h2>Start with decisions,<br>not a preset list.</h2>
+          <p class="mu-dark-lead">
+            A new run opens thirteen mixed packs. Keep exactly one card from each,
+            then add seven unlimited basic lands. The first strategic choice happens
+            before the first application is sent.
           </p>
-        </div>
-        <div class="project-info-card">
-          <h3>Deckbuilding &amp; drafting</h3>
-          <p>
-            45+ cards defined purely in YAML: dragons, bureaucracy monsters, graveyard reanimators,
-            risky lands like the Jobcenter (extra mana, costs life). Boosters are draft picks —
-            three cards shown, keep one — with themed packs per archetype.
-          </p>
-        </div>
-        <div class="project-info-card">
-          <h3>Combat with real decisions</h3>
-          <p>
-            Choose attackers, hold creatures back as blockers, activate abilities (sacrifice the
-            Aktenschredder to reanimate your best creature). Bosses have pixel-art faces, taunts,
-            and rule-bending abilities — one makes your hand unreadable.
-          </p>
-        </div>
-        <div class="project-info-card">
-          <h3>Base building</h3>
-          <p>
-            Furnish your rented flat along a small tech tree: a mini-fridge grants extra life, the
-            canned-beer pallet on top of it trades hand size for health, and the dragon poster on
-            the wall buffs every dragon you play.
-          </p>
+          <div class="mu-archetypes" aria-label="Deck archetypes">
+            <article>
+              <span class="mu-pixel-icon mu-pixel-icon-dragon" aria-hidden="true"></span>
+              <h3>Dragons</h3>
+              <p>Expensive threats that reward committing to the tribe.</p>
+            </article>
+            <article>
+              <span class="mu-pixel-icon mu-pixel-icon-paper" aria-hidden="true"></span>
+              <h3>Bureaucracy</h3>
+              <p>Draw cards, file forms, and turn paperwork into an engine.</p>
+            </article>
+            <article>
+              <span class="mu-pixel-icon mu-pixel-icon-moon" aria-hidden="true"></span>
+              <h3>Graveyard</h3>
+              <p>Mill cards deliberately and bring the best creatures back.</p>
+            </article>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section id="play" style="background: var(--background-primary);">
-    <div class="container">
-      <div class="section-header">
-        <h2>Download &amp; play</h2>
-        <p>All you need is Python 3.11+ and five minutes.</p>
+    <section id="screens" class="mu-section mu-gallery-section">
+      <div class="container">
+        <div class="mu-intro-grid">
+          <div>
+            <p class="mu-section-label">Current in-game footage</p>
+            <h2>A small world with a clear visual language.</h2>
+          </div>
+          <p class="mu-section-lead">
+            The interface uses one coherent pixel system: cut-corner panels, physical card frames,
+            restrained animation, and a nocturnal palette that follows the run from inbox to duel.
+          </p>
+        </div>
+
+        <div class="mu-gallery">
+          <figure class="mu-gallery-wide mu-screen">
+            <img src="../../assets/projects/magical-unemployment/boss-intent.png" alt="A typewriter-style boss announcement explains the next attack before the round begins" width="1280" height="800" loading="lazy">
+            <figcaption><strong>Readable threats.</strong> Every round opens with a skippable, voiced boss announcement.</figcaption>
+          </figure>
+          <figure class="mu-screen">
+            <img src="../../assets/projects/magical-unemployment/apartment.png" alt="Sparse pixel-art apartment and furniture upgrade list" width="1280" height="800" loading="lazy">
+            <figcaption><strong>Visible progress.</strong> The apartment fills up as the run develops.</figcaption>
+          </figure>
+          <article class="mu-quote-card">
+            <p>“I skipped the shower<br>just for this duel.”</p>
+            <span>— Stinkender Sebastian, first boss</span>
+          </article>
+        </div>
       </div>
+    </section>
 
-      <div class="setup-panel">
-        <h3>1. Get the game</h3>
-        <p>Clone the repository (or download it as a ZIP from GitHub and unpack it):</p>
-        <pre><code>git clone https://github.com/Dreckhoff/magical_unemployment.git
+    <section id="play" class="mu-play-section">
+      <div class="container">
+        <div class="mu-play-header">
+          <div>
+            <p class="mu-section-label">Play the current build</p>
+            <h2>From repository to first run in a few minutes.</h2>
+          </div>
+          <a href="https://github.com/Dreckhoff/magical_unemployment" target="_blank" rel="noopener noreferrer" class="mu-button mu-button-primary">Open GitHub repository <span aria-hidden="true">↗</span></a>
+        </div>
+
+        <div class="mu-setup-grid">
+          <article class="mu-setup-card">
+            <span class="mu-setup-number">01</span>
+            <h3>Get the game</h3>
+            <p>Download the repository as a ZIP, or clone it from the terminal:</p>
+            <pre><code>git clone https://github.com/Dreckhoff/magical_unemployment.git
 cd magical_unemployment</code></pre>
-      </div>
-
-      <div class="setup-panel">
-        <h3>2. Start it</h3>
-        <p>
-          <strong>macOS:</strong> double-click <code>Magical Unemployment.command</code> in the
-          project folder — on first launch it sets up its own Python environment and installs the
-          dependencies automatically. That's it.
-        </p>
-        <p><strong>Any platform</strong>, from a terminal:</p>
-        <pre><code>python3 -m venv .venv
-source .venv/bin/activate      # Windows: .venv\Scripts\activate
+          </article>
+          <article class="mu-setup-card">
+            <span class="mu-setup-number">02</span>
+            <h3>Start playing</h3>
+            <p><strong>macOS:</strong> double-click <code>Magical Unemployment.command</code>. It prepares the environment on first launch.</p>
+            <p><strong>Any platform:</strong></p>
+            <pre><code>python3 -m venv .venv
+source .venv/bin/activate
 pip install -r requirements.txt
 python play_gui.py</code></pre>
-        <p>
-          There is an in-game tutorial in the main menu. Dependencies are just
-          <code>pygame-ce</code>, <code>pyyaml</code>, and <code>pytest</code>.
-        </p>
+          </article>
+        </div>
+        <p class="mu-setup-note">Requires Python 3.11+. An interactive tutorial is available from the main menu.</p>
       </div>
+    </section>
 
-    </div>
-  </section>
-
-  <section>
-    <div class="container">
-      <div class="section-header">
-        <h2>Add your own content — seriously, it's easy</h2>
-        <p>This game is built to be contributed to. Everything is plain text.</p>
-      </div>
-      <div class="project-section-grid">
-        <div class="project-info-card">
-          <h3>Cards are 15 lines of YAML</h3>
-          <p>
-            A new card is a single YAML file: name, cost, stats, tags, and effects picked from a
-            documented library (damage, draw, auras, triggers, reanimation, activated abilities).
-            No engine code, no build step — drop the file in <code>data/cards/</code> and it's in
-            the game.
-          </p>
-        </div>
-        <div class="project-info-card">
-          <h3>Pixel art is literally text</h3>
-          <p>
-            Every sprite — card icons, boss faces, apartment furniture — is a character grid where
-            each letter is a palette color. You can draw a card icon in a text editor, or in a chat
-            message. A converter snippet turns small PNGs into grids automatically.
-          </p>
-        </div>
-        <div class="project-info-card">
-          <h3>Bosses, furniture, whole archetypes</h3>
-          <p>
-            New opponents are a dozen lines of data (life, abilities, a pixel face, and — most
-            importantly — their taunts). Apartment furniture needs a catalog entry, a sprite, and a
-            spot in the room. The guide covers all of it step by step.
-          </p>
-        </div>
-        <div class="project-info-card">
-          <h3>The contribution guide</h3>
-          <p>
-            The full guide lives as <code>CONTRIBUTING.md</code> in the repository root, with a
-            printable PDF version in <code>docs/</code>. No Git skills required — a YAML file or a
-            text grid pasted into a message is a perfectly valid contribution.
-          </p>
-          <div class="project-actions">
-            <a href="https://github.com/Dreckhoff/magical_unemployment/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Read CONTRIBUTING.md</a>
-            <a href="https://github.com/Dreckhoff/magical_unemployment/blob/main/docs/CONTRIBUTING.pdf" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">PDF version</a>
+    <section id="under-the-hood" class="mu-section">
+      <div class="container">
+        <div class="mu-intro-grid">
+          <div>
+            <p class="mu-section-label">Under the hood</p>
+            <h2>Designed for cards that surprise each other.</h2>
           </div>
+          <p class="mu-section-lead">
+            The architecture borrows a habit from scientific computing: keep rules, parameters,
+            and presentation separate, so each part stays understandable and testable.
+          </p>
         </div>
-      </div>
-    </div>
-  </section>
 
-  <section>
-    <div class="container">
-      <div class="section-header">
-        <h2>Under the hood</h2>
-        <p>The interesting part, if you ask me: the architecture borrows habits from scientific computing.</p>
+        <div class="mu-tech-grid">
+          <article>
+            <strong>01 / Data</strong>
+            <h3>Cards live in YAML.</h3>
+            <p>Stats, tags, text, and effects are plain data. Adding a normal card does not touch the engine.</p>
+          </article>
+          <article>
+            <strong>02 / Composition</strong>
+            <h3>Effects stay reusable.</h3>
+            <p>Small registered handlers combine damage, draw, auras, triggers, and reanimation.</p>
+          </article>
+          <article>
+            <strong>03 / Interaction</strong>
+            <h3>Events create synergies.</h3>
+            <p>Cards respond to shared game events, so new cards can interact with old ones naturally.</p>
+          </article>
+          <article>
+            <strong>04 / Reliability</strong>
+            <h3>279 tests run headless.</h3>
+            <p>The rules engine has no graphics dependency; core, meta-game, cards, and screens are testable in isolation.</p>
+          </article>
+        </div>
+
+        <aside class="mu-contribute">
+          <div>
+            <p class="mu-section-label">Make something weird</p>
+            <h2>Cards and pixel art are meant to be extended.</h2>
+            <p>
+              A card is a short YAML file. A sprite is a tiny character grid. The contribution guide
+              explains how to add cards, bosses, furniture, and whole archetypes without a build system.
+            </p>
+          </div>
+          <div class="mu-actions">
+            <a href="https://github.com/Dreckhoff/magical_unemployment/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener noreferrer" class="mu-button mu-button-primary">Contribution guide <span aria-hidden="true">↗</span></a>
+            <a href="../../projects.html" class="mu-button mu-button-light">Back to projects</a>
+          </div>
+        </aside>
       </div>
-      <div class="project-section-grid">
-        <div class="project-info-card">
-          <h3>Cards are data, not code</h3>
-          <p>
-            Every card is a ~15-line YAML file with stats, tags, and a list of effects. The engine
-            has no idea specific cards exist — it only interprets effect descriptions. Adding a card
-            never touches engine code, the same way a good simulation separates model parameters
-            from the integrator.
-          </p>
-        </div>
-        <div class="project-info-card">
-          <h3>Composable effect engine</h3>
-          <p>
-            Effects (<code>deal_damage</code>, <code>reanimate</code>, <code>mill</code>, auras,
-            triggers, activated abilities) are small registered handler functions. Continuous
-            effects are never cached: a creature's current stats are recomputed on demand from the
-            full game state — state is derived, not duplicated, so it cannot go stale.
-          </p>
-        </div>
-        <div class="project-info-card">
-          <h3>Event bus for emergence</h3>
-          <p>
-            Game events (<code>creature_entered</code>, <code>card_drawn</code>,
-            <code>creature_died</code>) are published on a bus; cards subscribe while in play.
-            That's how a card written today can interact with one written next year without either
-            knowing the other exists — interactions emerge from local rules.
-          </p>
-        </div>
-        <div class="project-info-card">
-          <h3>Headless core, 220+ tests</h3>
-          <p>
-            The rules engine imports no graphics library at all — it runs headless, which makes it
-            fully unit-testable. Every card ships with its own pytest; the GUI is a thin rendering
-            layer on top and is smoke-tested against a dummy video driver in CI fashion. Even the
-            sound effects are synthesized sine waves — the repository contains no binary assets,
-            only text.
-          </p>
-        </div>
-      </div>
-      <div class="project-actions" style="margin-top: 2rem;">
-        <a href="https://github.com/Dreckhoff/magical_unemployment" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Read the source</a>
-        <a href="../../projects.html" class="btn btn-secondary">Back to projects</a>
-      </div>
-    </div>
-  </section>
+    </section>
+  </main>
 
   <footer>
     <div class="container">
