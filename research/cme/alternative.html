@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A visual, accessible guide to how growing clathrin coats stiffen, remember their history, and choose between flat, stalled, and closed shapes.">
+  <title>How a Cell Builds a Vesicle | Johannes Dreckhoff</title>
+  <link rel="stylesheet" href="../../css/main.css?v=20260714">
+  <link rel="stylesheet" href="./alternative.css?v=20261024">
+</head>
+<body class="cme-alt">
+  <header>
+    <div class="container">
+      <a href="../../index.html" class="logo">Johannes Dreckhoff</a>
+      <nav aria-label="Main navigation">
+        <a href="../../index.html#about">About</a>
+        <a href="../../professional.html">Professional</a>
+        <a href="../../projects.html">Projects</a>
+        <a href="../../blog/index.html">Blog</a>
+        <a href="../../index.html#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="guide-hero">
+      <div class="container hero-layout">
+        <div class="hero-copy">
+          <p class="eyebrow">A visual guide · about 6 minutes</p>
+          <h1>How does a cell build a bubble — and why does the attempt sometimes stall?</h1>
+          <p class="hero-lead">
+            Cells routinely pull small patches of their surface inward and pinch them off as transport
+            vesicles. A protein called clathrin helps shape the membrane — but its coat can remain flat,
+            stop halfway, or close successfully. Our model asks how all three outcomes can grow from the
+            same local rules.
+          </p>
+          <p class="paper-line">
+            Guide to <cite>Pathway variability, coat stiffening and mechanical adaptation during
+            clathrin-mediated endocytosis</cite> by Dreckhoff, Schwarz &amp; Lettermann (2026 preprint).
+          </p>
+          <div class="hero-actions">
+            <a class="guide-button guide-button-primary" href="#story">Start the guide</a>
+            <a class="guide-button" href="https://arxiv.org/abs/2606.30267" target="_blank" rel="noopener noreferrer">Read the preprint ↗</a>
+          </div>
+        </div>
+
+        <figure class="hero-visual source-figure">
+          <div class="hero-figure-label">Inside the model</div>
+          <img src="../../assets/research/cme/figures-web/panels/fig1-panel-b.png" alt="Simulated clathrin lattice wrapped around a spherical membrane, with one molecular clathrin structure overlaid in green.">
+          <figcaption>
+            One simulated coat. Blue hubs and pink legs are the coarse-grained units; the green overlay
+            shows how a molecular clathrin structure maps onto the lattice.
+          </figcaption>
+        </figure>
+      </div>
+      <div class="container hero-takeaway">
+        <strong>The short version</strong>
+        <span>A clathrin coat is not born stiff. It becomes a material as it grows — and that changing material can redirect its own future.</span>
+      </div>
+    </section>
+
+    <nav class="chapter-nav" aria-label="Guide chapters">
+      <div class="container">
+        <a href="#story">The problem</a>
+        <a href="#outcomes">Three outcomes</a>
+        <a href="#model">The model</a>
+        <a href="#gates">Two gates</a>
+        <a href="#mechanics">Stiffness &amp; memory</a>
+        <a href="#test">A mechanical test</a>
+      </div>
+    </nav>
+
+    <section id="story" class="guide-section intro-section">
+      <div class="container narrow-container">
+        <div class="section-number">01 · The biological problem</div>
+        <h2>A molecular basket has to reshape a living boundary</h2>
+        <p class="section-deck">
+          The cell membrane is a flexible skin. To bring receptors, nutrients, and other cargo inside,
+          a patch of that skin bends inward and eventually separates as a tiny vesicle. Clathrin molecules
+          assemble on the membrane’s inner face into a polygonal scaffold that helps organize this process.
+        </p>
+        <div class="concept-pair">
+          <figure class="source-figure">
+            <img src="../../assets/research/cme/figures-web/panels/fig1-panel-a.png" loading="lazy" alt="High-speed atomic-force-microscopy reconstruction of a clathrin coat on a membrane.">
+            <figcaption><span>Experiment</span> A clathrin coat reconstructed from high-speed AFM data. Green lines mark detected connections.</figcaption>
+          </figure>
+          <div class="plain-card">
+            <p class="card-kicker">Why this is hard to observe</p>
+            <h3>We can see snapshots or motion — rarely both at molecular detail.</h3>
+            <p>
+              Electron and force microscopy reveal coat structure but do not follow one coat through its
+              entire life. Live-cell imaging follows individual sites, but not every bond or local curvature.
+              Simulations can connect those two views.
+            </p>
+          </div>
+        </div>
+        <details class="science-layer">
+          <summary><span>Scientific layer</span> What exactly is unresolved?</summary>
+          <div>
+            <p>
+              Mature clathrin coats are far stiffer than individual clathrin legs. Many continuum models
+              therefore prescribe coat stiffness and preferred curvature as fixed inputs. The open question
+              addressed here is whether those material properties can instead emerge from discrete,
+              stochastic assembly — and thereby help select the pathway.
+            </p>
+          </div>
+        </details>
+      </div>
+    </section>
+
+    <section id="outcomes" class="guide-section outcomes-section">
+      <div class="container">
+        <div class="section-heading-row">
+          <div>
+            <div class="section-number">02 · Pathway variability</div>
+            <h2>One starting point. Three possible endings.</h2>
+          </div>
+          <p>
+            Every simulated coat starts small and nearly flat. The final shape is not assigned in advance.
+            Local, random assembly events and the membrane’s mechanical resistance make trajectories diverge.
+          </p>
+        </div>
+
+        <div class="fate-cards">
+          <article class="fate-card fate-flat">
+            <div class="fate-topline"><span>01</span><strong>Flat plaque</strong></div>
+            <video controls muted playsinline preload="metadata" poster="../../assets/research/cme/video-posters/Supplementary_Movie_S3.jpg">
+              <source src="../../assets/research/cme/SupplVideos/Supplementary_Movie_S3.mp4" type="video/mp4">
+            </video>
+            <p>The lattice gains area, but remains too loosely connected to transmit a coherent bending stress.</p>
+          </article>
+          <article class="fate-card fate-aborted">
+            <div class="fate-topline"><span>02</span><strong>Aborted pit</strong></div>
+            <video controls muted playsinline preload="metadata" poster="../../assets/research/cme/video-posters/Supplementary_Movie_S4.jpg">
+              <source src="../../assets/research/cme/SupplVideos/Supplementary_Movie_S4.mp4" type="video/mp4">
+            </video>
+            <p>The coat bends the membrane, but reaches a mechanically favorable state before closure.</p>
+          </article>
+          <article class="fate-card fate-closed">
+            <div class="fate-topline"><span>03</span><strong>Closed coat</strong></div>
+            <video controls muted playsinline preload="metadata" poster="../../assets/research/cme/video-posters/Supplementary_Movie_S5.jpg">
+              <source src="../../assets/research/cme/SupplVideos/Supplementary_Movie_S5.mp4" type="video/mp4">
+            </video>
+            <p>The energy-favored state keeps moving toward higher closure until a vesicle-like coat forms.</p>
+          </article>
+        </div>
+
+        <div class="state-map">
+          <figure>
+            <img src="../../assets/research/cme/figures-web/panels/fig1-panel-f.png" loading="lazy" alt="Area-curvature state map with representative flat, aborted, and closed clathrin-coat trajectories and two fate gates.">
+            <figcaption>Representative trajectories through the membrane-area–curvature plane.</figcaption>
+          </figure>
+          <div class="state-map-copy">
+            <p class="card-kicker">One map, three routes</p>
+            <h3>The pathways separate in an area–curvature state plane.</h3>
+            <dl>
+              <div><dt>Up</dt><dd>The coated membrane area grows.</dd></div>
+              <div><dt>Right</dt><dd>The membrane becomes more strongly curved.</dd></div>
+            </dl>
+            <p>
+              A flat plaque moves almost straight upward: it grows without bending. An aborted pit moves
+              rightward but stops before closure. A closed trajectory continues toward the geometric boundary
+              φ = 1. The diamonds mark the two gates developed below.
+            </p>
+          </div>
+        </div>
+
+        <div class="reading-note">
+          <strong>Important:</strong> “Aborted” here is a mechanical fate in the model. In a cell, limited
+          lifetime, disassembly, actin, cargo, and other proteins can also change what happens next.
+        </div>
+
+        <details class="science-layer light-layer">
+          <summary><span>Scientific layer</span> How is shape measured?</summary>
+          <div>
+            <p>
+              The membrane is represented as a spherical cap with area <i>A</i> and mean curvature <i>H</i>.
+              The dimensionless closure φ = <i>AH</i><sup>2</sup>/4π runs from 0 for a flat patch to 1 for a
+              complete sphere. Flat, stalled, and closed trajectories occupy distinct routes in this
+              area–curvature plane.
+            </p>
+          </div>
+        </details>
+      </div>
+    </section>
+
+    <section id="model" class="guide-section model-section">
+      <div class="container">
+        <div class="section-number">03 · The model</div>
+        <h2>A bridge between molecules and membrane shape</h2>
+        <p class="section-deck left-deck">
+          The simulation keeps only what is needed to let structure and mechanics influence each other.
+          It combines discrete clathrin-like units with a continuous, deformable membrane.
+        </p>
+
+        <div class="model-layout">
+          <div class="model-steps" aria-label="Three coupled parts of the model">
+            <article>
+              <span class="model-index">A</span>
+              <div><h3>Units act locally</h3><p>Units bind, unbind, diffuse, and form or break bonds with nearby units.</p></div>
+            </article>
+            <article>
+              <span class="model-index">B</span>
+              <div><h3>A lattice emerges</h3><p>Those local events produce connectivity, vacancies, and polygonal defects.</p></div>
+            </article>
+            <article>
+              <span class="model-index">C</span>
+              <div><h3>The membrane responds</h3><p>Between assembly events, membrane curvature adapts to the current mechanical state.</p></div>
+            </article>
+          </div>
+          <figure class="source-figure large-source-figure">
+            <img src="../../assets/research/cme/figures-web/panels/fig1-panel-c.png" loading="lazy" alt="Coarse-grained model of clathrin units diffusing, binding, unbinding, and remodeling bonds on a curved membrane.">
+            <figcaption><span>Model view</span> Discrete clathrin units and continuous membrane curvature evolve together.</figcaption>
+          </figure>
+        </div>
+
+        <div class="model-principle">
+          <p>Nothing in the code says “make a plaque” or “make a vesicle.”</p>
+          <strong>The pathway is an outcome, not an instruction.</strong>
+        </div>
+      </div>
+    </section>
+
+    <section id="gates" class="guide-section gates-section">
+      <div class="container">
+        <div class="section-number">04 · The central result</div>
+        <h2>Two gates turn microscopic noise into three fates</h2>
+        <p class="section-deck left-deck">
+          The branching is easier to understand as two gates reached in sequence. The first asks whether
+          the coat can act as a connected material. The second asks where that changing material makes the
+          system want to go.
+        </p>
+
+        <div class="decision-flow" aria-label="Two-stage flow diagram from a small coat through the connectivity and growth-history gates to flat, aborted, or closed outcomes.">
+          <section class="flow-stage">
+            <div class="flow-stage-label"><span>Gate 1</span><strong>Connectivity</strong></div>
+            <div class="flow-row">
+              <div class="flow-input">
+                <span>Starting state</span>
+                <strong>Small, nearly flat coat</strong>
+              </div>
+              <div class="flow-arrow" aria-hidden="true">→</div>
+              <div class="flow-question">
+                <span>Connectivity threshold</span>
+                <h3>Can stress travel across the lattice?</h3>
+                <p>The coat needs enough interconnected units for mechanical stress to propagate across the lattice.</p>
+              </div>
+              <div class="flow-arrow flow-split" aria-hidden="true">↗<br>↘</div>
+              <div class="flow-branches">
+                <article class="flow-result result-flat">
+                  <img src="../../assets/research/cme/video-posters/Supplementary_Movie_S3.jpg" loading="lazy" alt="Flat simulated clathrin coat.">
+                  <div><span>No</span><strong>Flat plaque</strong><p>Area grows; curvature does not.</p></div>
+                </article>
+                <article class="flow-continue">
+                  <span>Yes</span>
+                  <strong>The coat bends, stiffens, and proceeds to Gate 2.</strong>
+                </article>
+              </div>
+            </div>
+          </section>
+
+          <section class="flow-stage flow-stage-second">
+            <div class="flow-stage-label"><span>Gate 2</span><strong>Growth history + membrane mechanics</strong></div>
+            <div class="flow-row">
+              <div class="flow-input">
+                <span>New state</span>
+                <strong>Connected, curved coat</strong>
+              </div>
+              <div class="flow-arrow" aria-hidden="true">→</div>
+              <div class="flow-question">
+                <span>Moving energy landscape</span>
+                <h3>Where does the energy minimum move?</h3>
+                <p>Stiffness, curvature memory, and membrane load reshape the landscape during growth.</p>
+              </div>
+              <div class="flow-arrow flow-split" aria-hidden="true">↗<br>↘</div>
+              <div class="flow-branches">
+                <article class="flow-result result-aborted">
+                  <img src="../../assets/research/cme/video-posters/Supplementary_Movie_S4.jpg" loading="lazy" alt="Partly invaginated, stalled simulated clathrin coat.">
+                  <div><span>Minimum remains inside</span><strong>Aborted pit</strong><p>The trajectory settles before closure.</p></div>
+                </article>
+                <article class="flow-result result-closed">
+                  <img src="../../assets/research/cme/video-posters/Supplementary_Movie_S5.jpg" loading="lazy" alt="Closed simulated clathrin coat.">
+                  <div><span>Minimum passes closure</span><strong>Closed coat</strong><p>The landscape keeps pulling the system onward.</p></div>
+                </article>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <details class="science-layer">
+          <summary><span>Scientific layer</span> How do the two gates differ mechanically?</summary>
+          <div>
+            <p>
+              <strong>Gate 1 is a connectivity gate.</strong> Below the threshold, the lattice cannot transmit
+              bending stresses coherently across the coat and remains flat. Above it, connected curved geometry
+              activates coat-scale stiffening. Connectivity here is therefore a mechanical proxy for stress
+              transmission, not a proposed universal number for every cell.
+            </p>
+            <p>
+              <strong>Gate 2 acts on coats that have already passed Gate 1.</strong> Polymerization favors adding
+              area, while membrane bending and surface tension penalize deformation. Clathrin elasticity favors
+              the coat’s current energy-minimizing curvature, with a strength set by its effective bending
+              rigidity. Because the coat properties evolve during assembly, the total energy minimum moves
+              through area–curvature space and either remains accessible before closure or crosses the closure
+              boundary.
+            </p>
+          </div>
+        </details>
+      </div>
+    </section>
+
+    <section id="mechanics" class="guide-section mechanics-section">
+      <div class="container">
+        <div class="section-number">05 · The mechanism</div>
+        <h2>The coat acquires stiffness — and a memory</h2>
+        <p class="section-deck left-deck">
+          These are not poetic labels. They are effective material properties measured from the simulated
+          coat and predicted by a continuum theory of curved elastic sheets.
+        </p>
+
+        <div class="mechanism-grid">
+          <article class="mechanism-card">
+            <figure class="mechanism-art">
+              <img src="../../assets/research/cme/figures-web/panels/fig4-panel-a-mechanism.png" loading="lazy" alt="Comparison of curvature changes in a flat and a curved connected lattice: the curved lattice must also compress.">
+              <figcaption>Figure 4A · The same curvature change excites different deformation modes.</figcaption>
+            </figure>
+            <p class="card-kicker">Geometry-induced stiffening</p>
+            <h3>Curvature makes bending expensive.</h3>
+            <p>
+              A nearly flat connected lattice can change shape mostly by rotating its links. In a curved
+              lattice, changing curvature also forces parts of the network to stretch or compress. Because
+              stretching is much costlier, the effective bending rigidity rises sharply as closure grows.
+            </p>
+          </article>
+
+          <article class="mechanism-card">
+            <figure class="mechanism-art">
+              <img src="../../assets/research/cme/figures-web/panels/fig4-panel-b-memory.png" loading="lazy" alt="Growing curved shells and a plot showing growth curvature rising while the coat's energy-minimizing curvature records earlier states.">
+              <figcaption>Figure 4B · Material added at different times stores different reference curvatures.</figcaption>
+            </figure>
+            <p class="card-kicker">Curvature memory</p>
+            <h3>New material records the shape in which it joined.</h3>
+            <p>
+              Each newly incorporated part is relaxed at the membrane curvature present at that moment.
+              The mature coat therefore prefers a weighted average of its growth curvatures — not simply
+              the microscopic preferred curvature of one clathrin unit, and not merely its final shape.
+            </p>
+          </article>
+        </div>
+
+        <figure class="data-figure">
+          <img src="../../assets/research/cme/figures-web/panels/fig2-panels-fg-colormap.png" loading="lazy" alt="Simulation measurements showing effective coat rigidity rising and energy-minimizing curvature shifting as closure increases.">
+          <figcaption>
+            <span>Measured in the simulations</span>
+            At fixed growth curvature, effective rigidity rises by orders of magnitude (left), while the
+            energy-minimizing curvature shifts toward the curvature at which the coat grew (right).
+          </figcaption>
+        </figure>
+
+        <details class="science-layer">
+          <summary><span>Scientific layer</span> What does the theory predict?</summary>
+          <div>
+            <p>
+              For a connected spherical patch, curvature changes leave a residual dilation that grows with
+              closure. This couples the soft angular mode to the much stiffer in-plane stretching mode. A
+              single geometry-dependent weight then predicts both the increase in effective rigidity and the
+              shift of the effective energy-minimizing curvature. The same scaling collapses simulations run
+              at several fixed growth curvatures and remains predictive when curvature adapts during growth.
+            </p>
+          </div>
+        </details>
+      </div>
+    </section>
+
+    <section id="test" class="guide-section test-section">
+      <div class="container">
+        <div class="section-number">06 · A mechanical test</div>
+        <div class="test-layout">
+          <div class="test-copy">
+            <h2>Cut the coat, and its hidden stress becomes visible</h2>
+            <p class="section-deck left-deck">
+              If the lattice stores stress and growth history, severing some connections should change more
+              than its outline. The remaining structure should relax toward a new mechanical state.
+            </p>
+            <ol class="test-steps">
+              <li><span>1</span><p><strong>Assemble</strong> a mature, connected coat.</p></li>
+              <li><span>2</span><p><strong>Cut</strong> nodes and bonds along a path.</p></li>
+              <li><span>3</span><p><strong>Relax</strong> the connected remainder.</p></li>
+            </ol>
+            <p>
+              After cutting, the simulated coats become less stiff and, on average, shift toward higher
+              curvature. This is consistent with releasing stress and preferentially erasing older,
+              lower-curvature memory.
+            </p>
+          </div>
+          <div class="test-media">
+            <figure class="source-figure">
+              <img src="../../assets/research/cme/figures-web/fig-6.png" loading="lazy" alt="Simulation cutting protocol and distributions of changes in curvature, rigidity, and preferred curvature after relaxation.">
+              <figcaption><span>In-silico nanodissection</span> Cutting reduces effective stiffness and releases part of the stored curvature history.</figcaption>
+            </figure>
+            <video controls muted playsinline preload="metadata" poster="../../assets/research/cme/video-posters/Supplementary_Movie_S6.jpg">
+              <source src="../../assets/research/cme/SupplVideos/Supplementary_Movie_S6.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="guide-section boundaries-section">
+      <div class="container">
+        <div class="section-number">07 · Reading the result carefully</div>
+        <h2>What this study explains — and what it leaves open</h2>
+        <div class="boundaries-grid">
+          <div>
+            <h3>What the model supports</h3>
+            <ul>
+              <li>One microscopic rule set can produce flat, stalled, and closed coats.</li>
+              <li>Coat stiffness and preferred curvature can emerge during assembly.</li>
+              <li>Connectivity acts as an early mechanical gate.</li>
+              <li>Curvature can begin before visible non-hexagonal defects appear.</li>
+              <li>Cutting responses follow from stored stress and growth history.</li>
+            </ul>
+          </div>
+          <div>
+            <h3>What remains outside the model</h3>
+            <ul>
+              <li>The membrane is reduced to a spherical-cap geometry.</li>
+              <li>Actin, cargo, adaptors, and biochemical regulation are not modeled explicitly.</li>
+              <li>Finite simulation time is only a proxy for finite pit lifetime in cells.</li>
+              <li>Simulated connectivity is a mechanical quantity, not a direct experimental readout.</li>
+              <li>The work proposes a physical mechanism, not a complete model of living-cell CME.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="guide-section conclusion-section">
+      <div class="container conclusion-layout">
+        <div>
+          <p class="eyebrow">Take-home idea</p>
+          <h2>Assembly does not merely build the coat. It writes the coat’s mechanics.</h2>
+        </div>
+        <div>
+          <p>
+            A growing clathrin lattice becomes connected, stiffens through curved geometry, and remembers
+            the shapes in which new material was added. Those evolving properties feed back on membrane
+            shape and create multiple pathways from the same microscopic ingredients.
+          </p>
+          <div class="hero-actions">
+            <a class="guide-button guide-button-primary" href="https://arxiv.org/abs/2606.30267" target="_blank" rel="noopener noreferrer">Read on arXiv ↗</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2026 Johannes Dreckhoff. All rights reserved.</p>
+      <p><a href="../../impressum.html">Impressum</a></p>
+    </div>
+  </footer>
+
+  <script src="../../js/main.js"></script>
+</body>
+</html>
